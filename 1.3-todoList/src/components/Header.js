@@ -4,19 +4,16 @@ export default class Header extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      data: this.props.data,
+      data: props.data,
       val: ''
     }
     this.addTodoItem = this.addTodoItem.bind(this)
-    this.addItemValue = this.addItemValue.bind(this)
-    this.changeDataHandle = this.changeDataHandle.bind(this)
+    this.changeValue = this.changeValue.bind(this)
   }
 
-  // value的onChange事件
-  addItemValue(ev) {
-    let val = ev.target.value
+  changeValue(ev) {
     this.setState({
-      val
+      val: ev.target.value
     })
   }
 
@@ -24,8 +21,9 @@ export default class Header extends Component {
   addTodoItem(ev) {
     if(ev.keyCode === 13) {
       let t = Date.now()
-      let val = ev.target.value
-      let {data} = this.state
+      let {data, val} = this.state
+      val = val.trim()
+      let {changeDataHandle} = this.props
 
       // 添加value
       data.push({
@@ -35,19 +33,16 @@ export default class Header extends Component {
       })
 
       this.setState({
-        data
+        data,
+        val: '' // 清空value值
       })
-      console.log(data)
+
+      changeDataHandle(data)
     }
   }
 
-  // 通知父组件data的变化
-  changeDataHandle() {
-    console.log(123)
-  }
-
   render() {
-
+    let {addTodoItem, changeValue} = this
     let {val} = this.state
 
     return (
@@ -57,9 +52,8 @@ export default class Header extends Component {
           className="new-todo" 
           placeholder="请输入内容" 
           value={val}
-          onChange={this.addItemValue} 
-          onKeyDown={this.addTodoItem}
-          changeDataHandle={this.changeDataHandle}
+          onChange={changeValue}
+          onKeyDown={addTodoItem}
         />
       </header>
     )

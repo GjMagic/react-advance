@@ -3,17 +3,24 @@ import React, { Component } from 'react'
 export default class Footer extends Component {
   
   render() {
+
+    let {data} = this.props
+    let leftNum = data.filter((item) => {
+      return !item.isChecked
+    }).length
+
     return (
       <footer className="footer">
         <span className="todo-count">
-            <strong>0</strong>
-            <span>条未选中</span>
+            <strong>{leftNum}</strong>
+            <span> item left</span>
         </span>
         <ul className="filters">
-            <li><a href="" className="all">全部</a></li>
-            <li><a href="" className="active">未选中</a></li>
-            <li><a href="" className="completed">选中</a></li>
+            <li><a href="#/all" className="all">All</a></li>
+            <li><a href="#/active" className="active">Active</a></li>
+            <li><a href="#/completed" className="completed">Completed</a></li>
         </ul>
+        <button className="clear-completed">clear all completed</button>
       </footer>
     )
   }
