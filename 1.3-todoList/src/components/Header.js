@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 let propTypes = {
-  data: PropTypes.array,
   changeDataHandle: PropTypes.func
 }
 
@@ -10,7 +9,6 @@ export default class Header extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      data: props.data,
       val: ''
     }
     this.addTodoItem = this.addTodoItem.bind(this)
@@ -26,26 +24,14 @@ export default class Header extends Component {
   // 添加TodoItem
   addTodoItem(ev) {
     if(ev.keyCode === 13) {
-      let t = Date.now()
-      let {data, val} = this.state
-      val = val.trim()
+      let {val} = this.state
       let {changeDataHandle} = this.props
 
-      if(val === '') return; 
-
-      // 添加value
-      data.push({
-        id: t,
-        title: val,
-        isChecked: false
-      })
-
       this.setState({
-        data,
         val: '' // 清空value值
       })
 
-      changeDataHandle(data)
+      changeDataHandle(val)
     }
   }
 

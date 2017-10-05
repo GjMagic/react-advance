@@ -20,10 +20,23 @@ class App extends Component {
     this.onToggle = this.onToggle.bind(this)
     this.onClearCompleted = this.onClearCompleted.bind(this)
     this.onChangeView = this.onChangeView.bind(this)
+    this.onEdit = this.onEdit.bind(this)
   }
   
-  // 通知父组件data的变化
-  changeDataHandle(data) {
+  // 通知父组件val的变化
+  changeDataHandle(val) {
+    let t = Date.now()
+    val = val.trim()
+    let {data} = this.state
+    if(val === '') return; 
+    
+    // 添加value
+    data.push({
+      id: t,
+      title: val,
+      isChecked: false
+    })
+
     this.setState({
       data
     })
@@ -82,6 +95,17 @@ class App extends Component {
     this.setState({view})
   }
 
+  // 编辑的回调函数
+  onEdit(id, val) {
+    let {data} = this.state
+    data.forEach((item) => {
+      if(item.id === id) {
+        item.title = val
+      }
+    })
+    this.setState({data})
+  }
+
   render() {
     let {
       changeDataHandle, 
@@ -89,7 +113,8 @@ class App extends Component {
       toggleAll,
       onToggle,
       onClearCompleted,
-      onChangeView
+      onChangeView,
+      onEdit
     } = this
 
     let {data, view} = this.state
@@ -122,7 +147,8 @@ class App extends Component {
                     key={i}
                     {...{ // 自定义属性合并方式
                       removeItemHandle,
-                      onToggle
+                      onToggle,
+                      onEdit
                     }}
                   />
                 })
