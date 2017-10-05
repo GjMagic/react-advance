@@ -1,4 +1,10 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+
+let propTypes = {
+  data: PropTypes.array,
+  changeDataHandle: PropTypes.func
+}
 
 export default class Header extends Component {
   constructor(props) {
@@ -24,6 +30,8 @@ export default class Header extends Component {
       let {data, val} = this.state
       val = val.trim()
       let {changeDataHandle} = this.props
+
+      if(val === '') return; 
 
       // 添加value
       data.push({
@@ -59,3 +67,5 @@ export default class Header extends Component {
     )
   }
 }
+
+Header.propTypes = propTypes

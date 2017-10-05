@@ -6,19 +6,15 @@ let propTypes = {
   id: PropTypes.number,
   title: PropTypes.string,
   isChecked: PropTypes.bool,
-  removeItemHandle: PropTypes.func
+  removeItemHandle: PropTypes.func,
+  onToggle: PropTypes.func
 }
 
 export default class TodoItem extends Component {
   
   constructor(props) {
     super(props)
-    this.state = {
-      data: props.data,
-      isChecked: props.isChecked
-    }
     this.removeTodoItem = this.removeTodoItem.bind(this)
-    this.changeToggle = this.changeToggle.bind(this)
     this.toggle = this.toggle.bind(this)
   }
 
@@ -27,34 +23,18 @@ export default class TodoItem extends Component {
     removeItemHandle(id)
   }
 
-  // 单选的onChange
-  changeToggle(ev) {
-    let check = ev.target.checked
-    this.setState({ // 异步
-      isChecked: check
-    })
-  }
-
   // 单选
   toggle() {
-    let {isChecked, id} = this.props
-    let {data} = this.props
-    data.forEach((item) => {
-      if(item.id === id) {
-        item.isChecked = !isChecked
-      }
-    })
-    this.setState({
-      data
-    })
+    let {id, onToggle} = this.props
+
+    // 把单选的id传给父组件
+    onToggle(id)
   }
 
   render() {
-    let {removeTodoItem, changeToggle, toggle} = this
+    let {removeTodoItem, toggle} = this
 
-    let {isChecked} = this.props
-
-    let {title} = this.props
+    let {title, isChecked} = this.props
 
     let completed = isChecked ? 'completed' : ''
 
@@ -65,8 +45,7 @@ export default class TodoItem extends Component {
               className="toggle" 
               type="checkbox" 
               checked={isChecked}
-              onChange={changeToggle}
-              onClick={toggle}
+              onChange={toggle}
             />
             <label>{title}</label>
             <button 
