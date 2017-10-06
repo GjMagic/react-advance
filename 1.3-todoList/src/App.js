@@ -6,20 +6,36 @@ import Header from './components/Header'
 import Footer from './components/Footer'
 import TodoItem from './components/TodoItem'
 
+let data = [
+  {
+    id: 1,
+    title: '世界那么大',
+    isChecked: false 
+  },
+  {
+    id: 2,
+    title: '我想去看看',
+    isChecked: false 
+  },
+  {
+    id: 3,
+    title: '想都别想！',
+    isChecked: false 
+  }
+]
+
 class App extends Component {
 
   constructor(props) {
     super(props)
     this.state = {
-      data: props.data,
-      view: 'all'
+      data
     }
     this.changeDataHandle = this.changeDataHandle.bind(this)
     this.removeItemHandle = this.removeItemHandle.bind(this)
     this.toggleAll = this.toggleAll.bind(this)
     this.onToggle = this.onToggle.bind(this)
     this.onClearCompleted = this.onClearCompleted.bind(this)
-    this.onChangeView = this.onChangeView.bind(this)
     this.onEdit = this.onEdit.bind(this)
   }
   
@@ -113,11 +129,10 @@ class App extends Component {
       toggleAll,
       onToggle,
       onClearCompleted,
-      onChangeView,
       onEdit
     } = this
 
-    let {data, view} = this.state
+    let {data} = this.state
 
     // 未选中的个数
     let leftNum = data.filter((item) => {
@@ -128,12 +143,15 @@ class App extends Component {
         main = null,
         footer = null
 
+    /* let { match:{url} } = this.props */
+    let { location:{pathname} } = this.props // 获取路径信息
+
     // 通过view过滤数据
     data = data.filter((item) => {
-      switch (view) {
-        case 'active':
+      switch (pathname) {
+        case '/active':
           return !item.isChecked;
-        case 'completed':
+        case '/completed':
           return item.isChecked;
         default:
           return true
@@ -175,8 +193,7 @@ class App extends Component {
         data,
         leftNum,
         onClearCompleted,
-        onChangeView,
-        view
+        pathname
       }} 
     />);
 

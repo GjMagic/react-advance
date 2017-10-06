@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import { Link } from 'react-router-dom'
 
 let propTypes = { // 无论传过来什么属性都需要进行验证
   leftNum: PropTypes.number, 
   data: PropTypes.array,
   onClearCompleted: PropTypes.func,
-  onChangeView: PropTypes.func,
-  view: PropTypes.oneOf(['all', 'active', 'completed'])
+  pathname: PropTypes.string
 }
 
 export default class Footer extends Component {
@@ -15,9 +15,8 @@ export default class Footer extends Component {
     let {
       leftNum, 
       data, 
-      onClearCompleted, 
-      onChangeView, 
-      view
+      onClearCompleted,
+      pathname
     } = this.props
 
     let clearButton = null;
@@ -41,25 +40,22 @@ export default class Footer extends Component {
         </span>
         <ul className="filters">
             <li>
-              <a 
-                href="#/all" 
-                className={view === 'all' ? 'selected' : ''}
-                onClick={ev => onChangeView('all')}
-              >All</a>
+              <Link 
+                to="/" 
+                className={pathname === '/' ? 'selected' : ''}
+              >All</Link>
             </li>
             <li>
-              <a 
-                href="#/active"
-                className={view === 'active' ? 'selected' : ''}
-                onClick={ev => onChangeView('active')}
-              >Active</a>
+              <Link 
+                to="/active" 
+                className={pathname === '/active' ? 'selected' : ''}
+              >Active</Link>
             </li>
             <li>
-              <a 
-                href="#/completed"
-                className={view === 'completed' ? 'selected' : ''}
-                onClick={ev => onChangeView('completed')}
-              >Completed</a>
+              <Link 
+                to="/completed" 
+                className={pathname === '/completed' ? 'selected' : ''}
+              >Completed</Link>
             </li>
         </ul>
         {clearButton}
