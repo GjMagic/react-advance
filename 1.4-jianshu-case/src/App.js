@@ -1,13 +1,9 @@
-import React, { Component } from 'react';
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        App
-      </div>
-    );
-  }
+ReactDOM.render(
+    <div>Hello</div>,
+    document.getElementById('root')
+);
+
+if (module.hot) {
+    module.hot.accept();
 }
-
-export default App;
