@@ -1,0 +1,31 @@
+.label{
+    margin: 0 18px 18px 0 !important;
+}
+
+.recommend{
+    margin-bottom: 20px; padding-top: 0; font-size: 13px;
+    .title{
+        text-align: left;
+        span{ font-size: 14px; color: #969696; }
+        .reload{
+            float: right;
+            .page_count{
+                margin: 0 10px 0 0; font-size: 13px; color: #969696; display: inline-block;
+            }
+            .page_change{
+                font-size: 0; display: inline-block;
+
+                span{
+                    padding: 3px 5px; font-size: 12px; border: 1px solid #dcdcdc; text-align: center;
+                }
+
+                span:first-child{ border-radius: 4px 0 0 4px;  border-right: none;}
+
+                span:last-child{ padding-right: 2px;
+                    border-radius: 0 4px 4px 0;
+                }
+
+            }
+        }
+    }
+}

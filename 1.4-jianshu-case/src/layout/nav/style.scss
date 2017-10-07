@@ -1,0 +1,16 @@
+.nav{
+    border-color: #e7e7e7; border-width: 0 0 1px; background: #fff!important;
+
+    .avatar{
+        padding: 0 0 4px!important;
+        &:hover .dropDown{ display: block;}
+    }
+    .dropDown{
+        position: absolute; left: 0; top: 34px; width: 50px;
+        background: #fff; display: none;
+        border-radius: 4px; color: #666; padding: 10px 0;
+        box-shadow: 0 2px 8px rgba(0,0,0,.1); text-align: center;
+    }
+    // a{font-size: 17px; line-height: 28px;}
+    img{vertical-align: middle;}
+}
