@@ -31,7 +31,6 @@ export default class Home extends React.Component{
         Axios
         .post(`${cfg.url}/getAuthor`)
         .then(res => {
-            console.log(res)
             if(res.data.code === 0) {
                 this.setState({
                     authors: res.data.data

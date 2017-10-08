@@ -1,0 +1,24 @@
+
+.main{
+    box-shadow: 0 0 8px rgba(0,0,0,.2);
+}
+
+.sign_panel{
+    text-align: left!important;
+
+}
+.err{color:#9f3a38;}
+.title{
+    margin: 0 auto 50px; padding: 10px; font-weight: 400px; color: #969696;
+
+    a{ padding: 10px; color: #969696; }
+    b{ padding: 10px; font-weight: 700; }
+
+    .normal-title{
+        color: #969696;
+    }
+
+    .active{
+        font-weight: 700; color: #ea6f5a; border-bottom: 2px solid #ea5f5a;
+    }
+}
