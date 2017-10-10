@@ -1,7 +1,12 @@
 import Panel from './Panel';
 import S from './style.scss';
 import Validation from 'util/validation.js'
+import PropTypes from 'prop-types'
 
+let propTypes = {
+    signUpAjax: PropTypes.func,
+    signUpMsg: PropTypes.object
+}
 export default class SignUpPanel extends React.Component{
 
     constructor(props){
@@ -34,6 +39,7 @@ export default class SignUpPanel extends React.Component{
         this.changeName = this.changeName.bind(this)
         this.changePassw = this.changePassw.bind(this)
         this.changeCfPassw = this.changeCfPassw.bind(this)
+        this.onRegister = this.onRegister.bind(this)
     }
 
     // username的onChange
@@ -78,20 +84,72 @@ export default class SignUpPanel extends React.Component{
         })
     }
 
+    // 点击注册按钮时，
+    onRegister(ev) {
+        ev.stopPropagation();
+        ev.preventDefault(); // 不需要form帮我们提交数据，我们自己提交数据
+
+        let {validator} = this;
+        let {username, passw, cfPassw} = this.state;
+
+        let nameError = validator.valiOneByValue('username', username);
+        let passwError = validator.valiOneByValue('username', passw);
+        let cfPasswError = passw === cfPassw ? '' : '密码不一致';
+
+        this.setState({
+            nameError,
+            passwError,
+            cfPasswError
+        })
+
+        let {signUpAjax} = this.props;
+        if(!nameError && !passwError && !cfPasswError) {
+            signUpAjax({
+                username,
+                passw,
+                cfPassw
+            })
+        }
+    }
+
     render(){
 
-        let {changeName, changePassw, changeCfPassw} = this;
+        let {changeName, changePassw, changeCfPassw, onRegister} = this;
 
         let {username, passw, cfPassw, nameError, passwError, cfPasswError} = this.state;
+
+        let {signUpMsg} = this.props;
 
         let nameErrorMsg = nameError ? (<p className={S.err}>{nameError}</p>) : null;
         let passwErrorMsg = passwError ? (<p className={S.err}>{passwError}</p>) : null;
         let cfPasswErrorMsg = cfPasswError ? (<p className={S.err}>{cfPasswError}</p>) : null;
 
+        let resInfo = null;
+        console.log(signUpMsg)
+        /* let {code, msg} = signUpMsg.data;
+        if(signUpMsg) {
+            if(code === 0) {
+                resInfo = (
+                    <div className="ui message positive">
+                        <p>{msg}</p>
+                        <p>马上帮你登录</p>
+                    </div>
+                )
+            } else {
+                resInfo = (
+                    <div className="ui message error">
+                        <p>{msg}</p>
+                    </div>
+                )
+            }
+        } */
+
         return (
             <div className={S.sign_panel}>
+                {resInfo}
                 <form
                     className="ui form"
+                    onSubmit={onRegister}
                 >
                     <div className={`field ${nameError ? 'error' : ''}`}>
                         <input
@@ -123,7 +181,8 @@ export default class SignUpPanel extends React.Component{
                         {cfPasswErrorMsg}
                     </div>
                     <div className="field">
-                        <button type="submit"
+                        <button 
+                            type="submit"
                             className="ui button fluid primary"
                         >注册</button>
                     </div>
@@ -132,3 +191,5 @@ export default class SignUpPanel extends React.Component{
         );
     }
 }
+
+SignUpPanel.propTypes = propTypes;
