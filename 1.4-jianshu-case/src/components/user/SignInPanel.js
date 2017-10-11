@@ -14,7 +14,7 @@ export default class SignInPanel extends React.Component{
         super(props);
         this.state = {
             username: '',
-            passW: '',
+            passw: '',
             nameErr: '',
             passwErr: ''
         }
@@ -28,15 +28,15 @@ export default class SignInPanel extends React.Component{
             {strategy: 'maxLength:6', errorMsg: '最长为6'}
         ])
 
-        // passW的验证规则
-        this.validator.addByValue('passW',[
+        // passw的验证规则
+        this.validator.addByValue('passw',[
             {strategy: 'isEmpty', errorMsg: '密码不能为空'},
             {strategy: 'hasSpace', errorMsg: '密码不能有空格'},
             {strategy: 'maxLength:6', errorMsg: '最长为6'}
         ])
 
         this.changeName = this.changeName.bind(this);
-        this.changePassW = this.changePassW.bind(this);
+        this.changePassw = this.changePassw.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
     }
 
@@ -53,13 +53,13 @@ export default class SignInPanel extends React.Component{
     }
 
     // passW的onChange
-    changePassW(ev) {
+    changePassw(ev) {
         let {target} = ev
 
-        let msg = this.validator.valiOneByValue('passW',target.value)
+        let msg = this.validator.valiOneByValue('passw',target.value)
 
         this.setState({
-            passW: target.value,
+            passw: target.value,
             passwErr: msg
         })
     }
@@ -70,10 +70,10 @@ export default class SignInPanel extends React.Component{
         ev.preventDefault(); // 取消默认行为
         // 提交登录前也要先验证数据
         let {validator} = this;
-        let {username, passW} = this.state;
+        let {username, passw} = this.state;
 
         let nameErr = validator.valiOneByValue('username',username);
-        let passwErr = validator.valiOneByValue('passW',passW);
+        let passwErr = validator.valiOneByValue('passw',passw);
 
         this.setState({
             nameErr,
@@ -86,7 +86,7 @@ export default class SignInPanel extends React.Component{
         if(!nameErr && !passwErr) { // 两个都正确才能通过
             signInAjax({
                 username,
-                passW
+                passw
             });
         }   
 
@@ -94,21 +94,20 @@ export default class SignInPanel extends React.Component{
 
     render(){
 
-        let { changeName, changePassW, onSubmit } = this;
+        let { changeName, changePassw, onSubmit } = this;
 
-        let { username, passW, nameErr, passwErr } = this.state;
+        let { username, passw, nameErr, passwErr } = this.state;
 
         let { signInMsg } = this.props;
-
+        
         let nameErrMsg = nameErr ? (<p className={S.err}>{nameErr}</p>) : null;
         let passwErrMsg = passwErr ? (<p className={S.err}>{passwErr}</p>) : null;
 
         let resInfo = null;
-
-        if(signInMsg && signInMsg.data.code !==0) {
+        if(signInMsg && signInMsg.code !== 0) {
             resInfo = (
                 <div className="ui message error">
-                    <p>{signInMsg.data.msg}</p>
+                    <p>{signInMsg.msg}</p>
                 </div>
             )
         }
@@ -136,8 +135,8 @@ export default class SignInPanel extends React.Component{
                             type="text"
                             placeholder="密码"
                             ref={input => {this.passwDom = input}}
-                            value={passW}
-                            onChange={changePassW}
+                            value={passw}
+                            onChange={changePassw}
                         />
                         {passwErrMsg}
                     </div>

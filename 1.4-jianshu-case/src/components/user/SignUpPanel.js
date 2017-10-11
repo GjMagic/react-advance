@@ -125,9 +125,9 @@ export default class SignUpPanel extends React.Component{
         let cfPasswErrorMsg = cfPasswError ? (<p className={S.err}>{cfPasswError}</p>) : null;
 
         let resInfo = null;
-        console.log(signUpMsg)
-        /* let {code, msg} = signUpMsg.data;
+        
         if(signUpMsg) {
+            let {code, msg} = signUpMsg;
             if(code === 0) {
                 resInfo = (
                     <div className="ui message positive">
@@ -142,7 +142,7 @@ export default class SignUpPanel extends React.Component{
                     </div>
                 )
             }
-        } */
+        }
 
         return (
             <div className={S.sign_panel}>

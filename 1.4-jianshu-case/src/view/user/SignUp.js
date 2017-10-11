@@ -13,10 +13,14 @@ export default class SignUp extends React.Component{
         super(props);
     }
 
+    // 清除错误提示信息
+    componentWillUnmount() {
+        this.props.clearResInfo();
+    }
+    
     render(){
 
         let {signUpAjax, signUpMsg} = this.props;
-
         return (
             <EntryPanel >
                 <SignUpPanel {...{
