@@ -3,11 +3,12 @@ import S from './style.scss';
 import PropTypes from 'prop-types';
 
 let propTypes = {
-    myInfo: PropTypes.object
+    myInfo: PropTypes.object,
+    logout: PropTypes.func
 }
 export default function Nav(props){ // 无状态函数式组件的props直接传进来即可
 
-    let {myInfo} = props;
+    let {myInfo, logout} = props;
     let userLink = null;
     if(myInfo){
         userLink = (
@@ -22,7 +23,13 @@ export default function Nav(props){ // 无状态函数式组件的props直接传
                     alt=""
                 />
                 <div className={S.dropDown}>
-                    <p>注销</p>
+                    <p
+                        onClick={(ev) => {
+                            ev.stopPropagation();
+                            ev.preventDefault();
+                            logout();
+                        }}
+                    >注销</p>
                 </div>
             </NavLink>
         )

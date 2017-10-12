@@ -1,0 +1,47 @@
+.author_info{
+    margin-bottom: 60px;
+    .avatar{
+        float: left; width: 80px; height: 80px; margin-left: -2px; display: block; cursor: pointer;
+        img{
+            width: 100%; height: 100%; border: 1px solid #ddd; border-radius: 50%; vertical-align: middle;
+        }
+    }
+    .title{
+        padding: 26px 0 0 100px;
+        .name{
+            font-size: 21px; font-weight: 700; vertical-align: middle;
+        }
+    }
+    .info{
+        margin-top: 5px; padding-left: 100px; font-size: 14px;
+        ul{
+            font-size: 0; padding-left: 0; margin-bottom: 10px;
+            li{
+                display: inline-block; line-height: 20px;
+                .meta_block{
+                    font-size: 12px; margin: 0 7px 6px 0; padding: 0 7px 0 0; border-right: 1px solid #f0f0f0;
+                }
+                a{font-size: 12px;}
+                p{margin-bottom: -3px; font-size: 15px; color: #333; margin: 0 0 10px;}
+            }
+            li:last-child .meta_block{
+                margin: 0; padding: 0; border: none;
+            }
+            div{color: #969696;}
+        }
+    }
+}
+
+.aside{
+    .info_edit{
+        float: right;
+    }
+    .special span{
+        float: right; font-size: 13px; color: #42c02e;
+    }
+    .special, .volume{
+        .title{
+            margin-bottom: 10px; font-size: 14px; color: #969696;;
+        }
+    }
+}
