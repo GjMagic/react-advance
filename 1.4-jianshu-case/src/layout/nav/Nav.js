@@ -1,7 +1,45 @@
 import { Link, NavLink} from 'react-router-dom';
 import S from './style.scss';
+import PropTypes from 'prop-types';
 
-export default function Nav(){
+let propTypes = {
+    myInfo: PropTypes.object
+}
+export default function Nav(props){ // 无状态函数式组件的props直接传进来即可
+
+    let {myInfo} = props;
+    let userLink = null;
+    if(myInfo){
+        userLink = (
+            <NavLink 
+                to="/my_page"
+                className={`${S.avatar} item`}
+                activeClassName="active"
+            >
+                <img
+                    src={myInfo.avatar}
+                    className="ui image avatar"
+                    alt=""
+                />
+                <div className={S.dropDown}>
+                    <p>注销</p>
+                </div>
+            </NavLink>
+        )
+    } else {
+        userLink = [
+            (<NavLink to="/sign_in"
+                className={`item`}
+                activeClassName="active"
+                key={0}
+            >登录</NavLink>),
+            (<NavLink to="/sign_up"
+                className={`item`}
+                activeClassName="active"
+                key={1}
+            >注册</NavLink>)
+        ]
+    }
 
     return (
         <div className={`ui fixed secondary pointing menu ${S.nav}`}>
@@ -17,16 +55,7 @@ export default function Nav(){
                 >首页</NavLink>
 
                 <div className="menu right">
-                    <NavLink to="/sign_in"
-                        className={`item`}
-                        activeClassName="active"
-                    >登录</NavLink>
-
-                    <NavLink to="/sign_up"
-                        className={`item`}
-                        activeClassName="active"
-                    >注册</NavLink>
-
+                    {userLink}
                     <NavLink to="/write"
                         className={`item`}
                         activeClassName="active"
@@ -36,3 +65,4 @@ export default function Nav(){
         </div>
     );
 }
+Nav.propTypes = propTypes;

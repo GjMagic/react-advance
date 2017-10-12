@@ -1,4 +1,4 @@
-import {Route} from 'react-router-dom';
+import {Route, Redirect} from 'react-router-dom';
 import Nav from 'nav/Nav';
 import Home from 'view/home/Home.js';
 import SignIn from 'view/user/SignIn';
@@ -11,13 +11,22 @@ export default class Layout extends React.Component{
     constructor(props){
         super(props);
         this.state = {
-            myInfo: null,
+            myInfo: null, // 控制是否变为头像
             signInMsg: null,
-            signUpMsg: null
+            signUpMsg: null,
+            hasLoginReq: false 
         }
         this.signInAjax = this.signInAjax.bind(this);
         this.signUpAjax = this.signUpAjax.bind(this);
         this.clearResInfo = this.clearResInfo.bind(this);
+        this.initMyInfo = this.initMyInfo.bind(this);
+    }
+
+    initMyInfo(myInfo) {
+        myInfo.avatar = cfg.url + myInfo.avatar;
+        this.setState({
+            myInfo
+        })
     }
 
     // 登录请求
@@ -35,13 +44,13 @@ export default class Layout extends React.Component{
         )
         .then(res => {
             let {code, msg} = res.data;
-            console.log(res.data)
-            let data = res.data;
+            let resData = res.data;
+
             if(code === 0) {
-                
+                this.initMyInfo(resData.data);
             } else {
                 this.setState({
-                    signInMsg: data
+                    signInMsg: resData
                 })
             }
         })
@@ -68,10 +77,35 @@ export default class Layout extends React.Component{
         )
         .then(res => {
             let {code, msg} = res.data;
-            let data = res.data;
+            let resData = res.data;
             // 不管code是不是0，都要更新signUpMsg
             this.setState({
-                signUpMsg: data
+                signUpMsg: resData
+            })
+
+            if(code === 0) {
+                setTimeout(() => {
+                    this.initMyInfo(resData.data);
+                },600)
+            }
+
+        })
+        .catch(err => {
+            console.log(err)
+        })
+    }
+
+    componentDidMount() {
+        Axios
+        .post(`${cfg.url}/autologin`)
+        .then(res => {
+            let resData = res.data;
+            if(resData.code === 0) {
+                this.initMyInfo(resData.data);
+            }
+            console.log(resData)
+            this.setState({
+                hasLoginReq: true
             })
         })
         .catch(err => {
@@ -83,28 +117,42 @@ export default class Layout extends React.Component{
 
         let { signInAjax, signUpAjax, clearResInfo } = this;
 
-        let { myInfo, signInMsg, signUpMsg } = this.state;
+        let { myInfo, signInMsg, signUpMsg, hasLoginReq } = this.state;
+
+        if(!hasLoginReq) { // 自动登录请求返回数据后，设置hasLoginReq为true,渲染真正的结构
+            return (<div></div>)
+        }
 
         return (
             <div className={S.layout}>
-                <Nav/>
+                <Nav {...{
+                    myInfo
+                }} />
                 <Route exact path="/" component={Home}/>
                 <Route exact path="/sign_in" render={
                     (props) => (
-                        <SignIn {...{ 
-                            signInAjax,
-                            signInMsg,
-                            clearResInfo 
-                        }} />
+                        myInfo ? (
+                            <Redirect to="/" />
+                        ) : (
+                            <SignIn {...{ 
+                                signInAjax,
+                                signInMsg,
+                                clearResInfo 
+                            }} />
+                        )
                     )
                 }/>
                 <Route exact path="/sign_up" render={
                     (props) => (
-                        <SignUp {...{
-                            signUpAjax,
-                            signUpMsg,
-                            clearResInfo
-                        }} />
+                        myInfo ? (
+                            <Redirect to="/" />
+                        ) : (
+                            <SignUp {...{
+                                signUpAjax,
+                                signUpMsg,
+                                clearResInfo
+                            }} />
+                        )
                     )
                 }/>
             </div>
