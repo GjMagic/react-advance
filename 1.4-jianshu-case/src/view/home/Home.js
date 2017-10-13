@@ -14,6 +14,13 @@ export default class Home extends React.Component{
             previews: [],
             authors: []
         }
+        this.collectionClick = this.collectionClick.bind(this);
+    }
+
+    // 点击文集进入my_page
+    collectionClick(collection_id, collection_name, userInfo) {
+        let {history, initMyPage} = this.props; 
+        history.push('/my_page', {userInfo})
     }
 
     componentDidMount() {
@@ -48,6 +55,8 @@ export default class Home extends React.Component{
 
     render(){
 
+        let { collectionClick } = this;
+
         let { previews, authors } = this.state
 
         let { initMyPage } = this.props;
@@ -58,7 +67,8 @@ export default class Home extends React.Component{
                     <PreviewList
                         {...{
                             previews,
-                            initMyPage
+                            initMyPage,
+                            collectionClick
                         }}
                     />
                 </div>

@@ -29,6 +29,7 @@ export default class Layout extends React.Component{
         this.getPreview = this.getPreview.bind(this);
         this.initMyPage = this.initMyPage.bind(this);
         this.changePreviewsName = this.changePreviewsName.bind(this);
+        this.collectionClick = this.collectionClick.bind(this);
     }
 
     // 初始化myInfo
@@ -41,8 +42,6 @@ export default class Layout extends React.Component{
             myInfo
         })
     }
-
-
 
     // 登录请求
     signInAjax(reqData) {
@@ -140,17 +139,21 @@ export default class Layout extends React.Component{
     }
 
     // 初始化my_page
-    initMyPage(user_id, previewsData, previewName) {
+    initMyPage(user_id, previewsData, previewsName) {
         this.getPreview(previewsData);
 
+        let qs = require('qs');
         Axios
-        .post(`${cfg.url}/getCollection`, {user_id})
+        .post(
+            `${cfg.url}/getCollection`, 
+            qs.stringify({user_id})
+        )
         .then(res => {
             let resData = res.data;
             if(resData.code === 0) {
                 this.setState({
                     notebooks: resData.data,
-                    previewName
+                    previewsName
                 })
             }
         })
@@ -160,6 +163,11 @@ export default class Layout extends React.Component{
         this.setState({
             previewsName
         })
+    }
+
+    // 点击文集进入my_page
+    collectionClick(collection_id, collection_name, userInfo) {
+        this.initMyPage(collection_id, userInfo, collection_name )
     }
 
     // 组件挂在完成之后
@@ -178,6 +186,15 @@ export default class Layout extends React.Component{
         .catch(err => {
             console.log(err)
         })
+
+        // 刷新my_page页面时初始化my_page
+        let {state, pathname} = this.props.location;
+        if(state) {
+            let {user_id} = state.userInfo;
+            if(pathname === '/my_page') {
+                this.initMyPage(user_id, {user_id}, '所有文章');
+            }
+        }
     }
 
     render(){
@@ -187,7 +204,8 @@ export default class Layout extends React.Component{
             signUpAjax, 
             clearResInfo, 
             logout, 
-            initMyPage 
+            initMyPage,
+            collectionClick 
         } = this;
 
         let { 
@@ -248,11 +266,20 @@ export default class Layout extends React.Component{
                 }/>
                 <Route exact path="/my_page" render={
                     (props) => (
-                        <MyPage {...{
-                            previewsName,
-                            myPagePreview,
-                            notebooks
-                        }} />
+                        // 通过地址栏url进入my_page页时并没有state，所以重定向到首页
+                        props.location.state ? ( 
+                            <MyPage 
+                                {...{
+                                    previewsName,
+                                    myPagePreview,
+                                    notebooks,
+                                    collectionClick
+                                }}
+                                {...props} // props里面有match,location,history
+                            />
+                        ) : (
+                            <Redirect to="/" />
+                        )
                     )
                 }/>
             </div>

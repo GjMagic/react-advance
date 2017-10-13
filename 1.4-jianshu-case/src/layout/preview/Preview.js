@@ -17,7 +17,7 @@ function Preview(props){
     } = props;
 
     createdAt = new Date(createdAt).toLocaleString();
-
+    //createdAt = '今天'
     return (
         <div className={`${S.note}`}>
             <div className="ui divider hidden"></div>
@@ -29,8 +29,15 @@ function Preview(props){
                         onClick={ev => {
                             ev.stopPropagation();
                             ev.preventDefault();
-                            history.push('/my_page'); // 利用history对象跳转页面
-                            initMyPage();
+                            history.push('/my_page', { // 通过路由Route把props传下去
+                                userInfo: {
+                                    user_id,
+                                    user_name,
+                                    avatar,
+                                    user_intro
+                                }
+                            }); // 利用history对象跳转页面
+                            initMyPage(user_id, {user_id}, '所有文章');
                         }}
                     >
                         <img src={avatar} alt="" className="ui avatar image"/>

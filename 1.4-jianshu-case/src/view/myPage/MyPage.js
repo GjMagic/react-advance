@@ -7,22 +7,35 @@ import PropTypes from 'prop-types'
 let propTypes = {
     previewsName: PropTypes.string,
     myPagePreview: PropTypes.array,
-    notebooks: PropTypes.array
+    notebooks: PropTypes.array,
+    location: PropTypes.object,
+    collectionClick: PropTypes.func
 }
 
 class MyPage extends React.Component {
-        
+    
+    constructor(props) {
+        super(props);
+    }
+    
     render() {
         let {
             previewsName, 
             myPagePreview, 
-            notebooks
+            notebooks,
+            location
         } = this.props;
         
+        let {userInfo} = location.state;
+
         return (
             <div className="ui container grid">
                 <div className="twelve wide column">
-                    <AuthorInfo />
+                    <AuthorInfo 
+                        {...{
+                            userInfo
+                        }}
+                    />
                     <div className="ui secondary pointing menu">
                         <span className="active item">
                             {previewsName}
@@ -34,7 +47,8 @@ class MyPage extends React.Component {
                 </div>
                 <div className="four wide column">
                     <Aside {...{
-                        notebooks
+                        notebooks,
+                        userInfo
                     }} />
                 </div>
             </div>
