@@ -2,19 +2,26 @@
 import S from './style.scss';
 let propTypes = {
     notebooks: PT.array,
-    userInfo: PT.object
+    userInfo: PT.object,
+    changePreviews: PT.func
 }
 
 export default class Aside extends React.Component {
 
     render() {
-        let {notebooks} = this.props;
+        let {notebooks, changePreviews} = this.props;
         let {user_intro} = this.props.userInfo;
 
         notebooks = notebooks.map((item, i) => {
             let {id: collection_id, collection_name} = item;
             return (
-                <div className="item" key={i}>
+                <div 
+                    className="item" 
+                    key={i}
+                    onClick={ev => {
+                        changePreviews({collection_id}, collection_name);
+                    }}
+                >
                     <i className="book icon"></i>
                     <div className="content">
                         {collection_name}

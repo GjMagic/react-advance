@@ -9,23 +9,33 @@ let propTypes = {
     myPagePreview: PropTypes.array,
     notebooks: PropTypes.array,
     location: PropTypes.object,
-    collectionClick: PropTypes.func
+    changePreviews: PropTypes.func
 }
 
 class MyPage extends React.Component {
     
     constructor(props) {
         super(props);
+        this.collectionClick = this.collectionClick.bind(this);
     }
     
+    // 点击my_page页的previews下的文集
+    collectionClick(collection_id, collection_name, userInfo) {
+        let {changePreviews} = this.props;
+        changePreviews({collection_id}, collection_name);
+    }
+
     render() {
         let {
             previewsName, 
             myPagePreview, 
             notebooks,
-            location
+            location,
+            changePreviews
         } = this.props;
         
+        let {collectionClick} = this;
+
         let {userInfo} = location.state;
 
         return (
@@ -42,13 +52,15 @@ class MyPage extends React.Component {
                         </span>
                     </div>
                     <PreviewList {...{
-                        previews: myPagePreview
+                        previews: myPagePreview,
+                        collectionClick
                     }} />
                 </div>
                 <div className="four wide column">
                     <Aside {...{
                         notebooks,
-                        userInfo
+                        userInfo,
+                        changePreviews
                     }} />
                 </div>
             </div>

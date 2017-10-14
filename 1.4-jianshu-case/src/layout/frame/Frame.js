@@ -28,18 +28,25 @@ export default class Layout extends React.Component{
         this.logout = this.logout.bind(this);
         this.getPreview = this.getPreview.bind(this);
         this.initMyPage = this.initMyPage.bind(this);
-        this.changePreviewsName = this.changePreviewsName.bind(this);
-        this.collectionClick = this.collectionClick.bind(this);
+        this.changePreviews = this.changePreviews.bind(this);
     }
 
     // 初始化myInfo
     initMyInfo(myInfo) {
+
+        let {id, avatar, username, user_intro} = myInfo;
+
         if(myInfo) {
-            myInfo.avatar = cfg.url + myInfo.avatar;
+            avatar = cfg.url + avatar;
         }
 
         this.setState({
-            myInfo
+            myInfo: {
+                user_id: id,
+                user_name: username,
+                avatar,
+                user_intro
+            }
         })
     }
 
@@ -121,7 +128,7 @@ export default class Layout extends React.Component{
         })
     }
 
-    getPreview(data) {
+    getPreview(data, previewsName) {
         let qs = require('qs');
         Axios
         .post(
@@ -132,21 +139,27 @@ export default class Layout extends React.Component{
             let resData = res.data;
             if(resData.code === 0) {
                 this.setState({
-                    myPagePreview: resData.data
+                    myPagePreview: resData.data,
+                    previewsName
                 })
             }
         })
     }
 
+    // 从my_page页点击文集时，改变previews和previewsName
+    changePreviews(data, previewsName) {
+        this.getPreview(data, previewsName);
+    }
+
     // 初始化my_page
     initMyPage(user_id, previewsData, previewsName) {
-        this.getPreview(previewsData);
+        this.getPreview(previewsData, previewsName);
 
         let qs = require('qs');
         Axios
         .post(
             `${cfg.url}/getCollection`, 
-            qs.stringify({user_id})
+            qs.stringify({user_id}) // 哪一个用户的
         )
         .then(res => {
             let resData = res.data;
@@ -157,17 +170,6 @@ export default class Layout extends React.Component{
                 })
             }
         })
-    }
-    
-    changePreviewsName(previewsName) {
-        this.setState({
-            previewsName
-        })
-    }
-
-    // 点击文集进入my_page
-    collectionClick(collection_id, collection_name, userInfo) {
-        this.initMyPage(collection_id, userInfo, collection_name )
     }
 
     // 组件挂在完成之后
@@ -192,7 +194,7 @@ export default class Layout extends React.Component{
         if(state) {
             let {user_id} = state.userInfo;
             if(pathname === '/my_page') {
-                this.initMyPage(user_id, {user_id}, '所有文章');
+                this.initMyPage(user_id, {user_id}, '所有文集');
             }
         }
     }
@@ -205,7 +207,7 @@ export default class Layout extends React.Component{
             clearResInfo, 
             logout, 
             initMyPage,
-            collectionClick 
+            changePreviews
         } = this;
 
         let { 
@@ -218,6 +220,8 @@ export default class Layout extends React.Component{
             notebooks 
         } = this.state;
 
+        let {history} = this.props;
+
         if(!hasLoginReq) { // 自动登录请求返回数据后，设置hasLoginReq为true,渲染真正的结构
             return (<div></div>)
         }
@@ -226,7 +230,9 @@ export default class Layout extends React.Component{
             <div className={S.layout}> 
                 <Nav {...{
                     myInfo,
-                    logout
+                    logout,
+                    initMyPage,
+                    history
                 }} />
                 <Route exact path="/" render={
                     (props) => (
@@ -273,7 +279,7 @@ export default class Layout extends React.Component{
                                     previewsName,
                                     myPagePreview,
                                     notebooks,
-                                    collectionClick
+                                    changePreviews
                                 }}
                                 {...props} // props里面有match,location,history
                             />

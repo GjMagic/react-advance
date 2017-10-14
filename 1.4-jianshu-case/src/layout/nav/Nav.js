@@ -4,11 +4,13 @@ import PropTypes from 'prop-types';
 
 let propTypes = {
     myInfo: PropTypes.object,
-    logout: PropTypes.func
+    logout: PropTypes.func,
+    initMyPage: PropTypes.func,
+    history: PropTypes.object
 }
 export default function Nav(props){ // 无状态函数式组件的props直接传进来即可
 
-    let {myInfo, logout} = props;
+    let {myInfo, myInfo: {user_id}, logout, history, initMyPage} = props;
     let userLink = null;
     if(myInfo){
         userLink = (
@@ -16,6 +18,12 @@ export default function Nav(props){ // 无状态函数式组件的props直接传
                 to="/my_page"
                 className={`${S.avatar} item`}
                 activeClassName="active"
+                onClick={ev => {
+                    ev.stopPropagation();
+                    ev.preventDefault();
+                    history.push('/my_page', {userInfo: myInfo});
+                    initMyPage(user_id, {user_id}, '所有文章');
+                }}
             >
                 <img
                     src={myInfo.avatar}

@@ -2,8 +2,8 @@ import {Link} from 'react-router-dom';
 import S from './style.scss';
 import Author from './Author';
 
-export default function Recommend({authors}){
-    
+export default function Recommend(props){
+    let {authors, homeAuthorClick} = props;
     return (
         <div className={S.recommend}>
             <div className={S.title}>
@@ -15,7 +15,8 @@ export default function Recommend({authors}){
                         return (
                             <Author
                                 {...{
-                                    user: item
+                                    user: item,
+                                    homeAuthorClick
                                 }}
                                 key={i}
                             />);
@@ -24,4 +25,9 @@ export default function Recommend({authors}){
             </div>
         </div>
     );
+}
+
+Recommend.propTypes = {
+    authors: PT.array,
+    homeAuthorClick: PT.func
 }

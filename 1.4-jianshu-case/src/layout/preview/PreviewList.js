@@ -42,24 +42,26 @@ export default function PreviewList(props){
                 }}
                 key={i}
             >
-                <Link 
-                    to="/my_page"
-                    className={S.tag}
-                    onClick={ev => {
-                        ev.stopPropagation();
-                        ev.preventDefault();
-                        collectionClick && collectionClick(
-                            collection_id, 
-                            collection_name, 
-                            { // 哪一个用户的文集
-                                user_id,
-                                user_name,
-                                avatar,
-                                user_intro
-                            }
-                        )
-                    }}
-                >{collection_name}</Link>
+                {collection_id ? (
+                    <Link 
+                        to="/my_page"
+                        className={S.tag}
+                        onClick={ev => {
+                            ev.stopPropagation();
+                            ev.preventDefault();
+                            collectionClick && collectionClick(
+                                collection_id, 
+                                collection_name, 
+                                { // 哪一个用户的文集
+                                    user_id,
+                                    user_name,
+                                    avatar,
+                                    user_intro
+                                }
+                            )
+                        }}
+                    >{collection_name}</Link>
+                ) : null}
             </Preview>
         );
     });

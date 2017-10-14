@@ -7,7 +7,6 @@ let propTypes = {
 }
 
 export default function AuthorInfo(props) {
-
     let {user_name, avatar} = props.userInfo;
 
     return (
