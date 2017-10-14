@@ -9,7 +9,10 @@ let propTypes = {
     myPagePreview: PropTypes.array,
     notebooks: PropTypes.array,
     location: PropTypes.object,
-    changePreviews: PropTypes.func
+    changePreviews: PropTypes.func,
+    initMyPage: PropTypes.func,
+    myInfo: PropTypes.object,
+    updataMyIntro: PropTypes.func
 }
 
 class MyPage extends React.Component {
@@ -31,19 +34,29 @@ class MyPage extends React.Component {
             myPagePreview, 
             notebooks,
             location,
-            changePreviews
+            changePreviews,
+            initMyPage,
+            myInfo,
+            updataMyIntro
         } = this.props;
         
         let {collectionClick} = this;
 
         let {userInfo} = location.state;
 
+        let isMe = false;
+        if(myInfo) {
+            isMe = myInfo.user_id === userInfo.user_id;
+            userInfo = myInfo;
+        }
+
         return (
             <div className="ui container grid">
                 <div className="twelve wide column">
                     <AuthorInfo 
                         {...{
-                            userInfo
+                            userInfo,
+                            initMyPage
                         }}
                     />
                     <div className="ui secondary pointing menu">
@@ -53,14 +66,18 @@ class MyPage extends React.Component {
                     </div>
                     <PreviewList {...{
                         previews: myPagePreview,
-                        collectionClick
+                        collectionClick,
+                        initMyPage
                     }} />
                 </div>
                 <div className="four wide column">
                     <Aside {...{
                         notebooks,
                         userInfo,
-                        changePreviews
+                        changePreviews,
+                        myInfo,
+                        updataMyIntro,
+                        isMe
                     }} />
                 </div>
             </div>

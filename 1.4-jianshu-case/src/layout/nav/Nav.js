@@ -10,9 +10,12 @@ let propTypes = {
 }
 export default function Nav(props){ // 无状态函数式组件的props直接传进来即可
 
-    let {myInfo, myInfo: {user_id}, logout, history, initMyPage} = props;
+    let {myInfo, logout, history, initMyPage} = props;
     let userLink = null;
     if(myInfo){
+
+        let {user_id} = myInfo;
+
         userLink = (
             <NavLink 
                 to="/my_page"

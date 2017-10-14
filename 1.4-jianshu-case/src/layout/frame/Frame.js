@@ -4,6 +4,8 @@ import Home from 'view/home/Home.js';
 import SignIn from 'view/user/SignIn';
 import SignUp from 'view/user/SignUp';
 import MyPage from 'view/myPage/MyPage';
+import Write from 'view/write/write';
+import LoginHint from 'layout/LoginHint';
 
 import S from './style.scss';
 import Axios from 'axios'
@@ -29,25 +31,24 @@ export default class Layout extends React.Component{
         this.getPreview = this.getPreview.bind(this);
         this.initMyPage = this.initMyPage.bind(this);
         this.changePreviews = this.changePreviews.bind(this);
+        this.updataMyIntro = this.updataMyIntro.bind(this);
     }
 
     // 初始化myInfo
-    initMyInfo(myInfo) {
-
-        let {id, avatar, username, user_intro} = myInfo;
-
+    initMyInfo(myInfo) { // 判断了myInfo存在和不存在两种情况
+        
         if(myInfo) {
+            let {id, avatar, username, user_intro} = myInfo;
             avatar = cfg.url + avatar;
-        }
-
-        this.setState({
-            myInfo: {
+            myInfo = {
                 user_id: id,
                 user_name: username,
                 avatar,
                 user_intro
             }
-        })
+        }
+
+        this.setState({ myInfo })
     }
 
     // 登录请求
@@ -165,10 +166,19 @@ export default class Layout extends React.Component{
             let resData = res.data;
             if(resData.code === 0) {
                 this.setState({
-                    notebooks: resData.data,
-                    previewsName
+                    notebooks: resData.data
                 })
             }
+        })
+    }
+
+    // 更新myInfo
+    updataMyIntro(editValue) {
+        let {myInfo} = this.state;
+        // 不要过度使用结构赋值，当要改变某个对象里的key/value时，不要使用解构赋值
+        myInfo.user_intro = editValue;
+        this.setState({
+            myInfo
         })
     }
 
@@ -207,7 +217,8 @@ export default class Layout extends React.Component{
             clearResInfo, 
             logout, 
             initMyPage,
-            changePreviews
+            changePreviews,
+            updataMyIntro
         } = this;
 
         let { 
@@ -279,7 +290,10 @@ export default class Layout extends React.Component{
                                     previewsName,
                                     myPagePreview,
                                     notebooks,
-                                    changePreviews
+                                    changePreviews,
+                                    initMyPage,
+                                    myInfo,
+                                    updataMyIntro
                                 }}
                                 {...props} // props里面有match,location,history
                             />
@@ -288,6 +302,20 @@ export default class Layout extends React.Component{
                         )
                     )
                 }/>
+                <Route path='/write' render={
+                    (props) => (
+                        myInfo ? (
+                            <Write 
+                                {...{
+                                    myInfo
+                                }}
+                            />
+                        ) : (
+                            <Redirect to='/login_hint' />
+                        )
+                    )
+                } />
+                <Route path='/login_hint' component={LoginHint}/>
             </div>
         );
     }
