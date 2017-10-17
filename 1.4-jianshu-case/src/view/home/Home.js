@@ -1,5 +1,6 @@
 import PreviewList from 'preview/PreviewList';
 import Recommend from 'components/home/Recommend';
+/* import Banner from 'components/home/Banner'; */
 import cfg from 'config/config.json'
 import Axios from 'axios'
 
@@ -73,6 +74,9 @@ export default class Home extends React.Component{
 
         return (
             <div className="ui container grid">
+                {/* <div className="column sixteen wide">
+                    <Banner />
+                </div> */}
                 <div className="column twelve wide">
                     <PreviewList
                         {...{
