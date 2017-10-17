@@ -12,6 +12,7 @@ export default function Nav(props){ // 无状态函数式组件的props直接传
 
     let {myInfo, logout, history, initMyPage} = props;
     let userLink = null;
+    let homeLink = null;
     if(myInfo){
 
         let {user_id} = myInfo;
@@ -19,7 +20,7 @@ export default function Nav(props){ // 无状态函数式组件的props直接传
         userLink = (
             <NavLink 
                 to="/my_page"
-                className={`${S.avatar} item`}
+                className={`${S.avatar} ui dropdown item`}
                 activeClassName="active"
                 onClick={ev => {
                     ev.stopPropagation();
@@ -33,54 +34,120 @@ export default function Nav(props){ // 无状态函数式组件的props直接传
                     className="ui image avatar"
                     alt=""
                 />
-                <div className={S.dropDown}>
+                <i className="caret down icon"></i>
+                <div className={`${S.dropDown} menu`}>
                     <p
                         onClick={(ev) => {
                             ev.stopPropagation();
                             ev.preventDefault();
                             logout();
                         }}
-                    >注销</p>
+                        className="item"
+                    ><i className="teal sign out icon"></i>注销</p>
+                    <p className="item"><i className="teal user icon"></i>我的主页</p>
+                    <p className="item"><i className="teal bookmark icon"></i>收藏的文章</p>
+                    <p className="item"><i className="teal heart icon"></i>喜欢的文章</p>
+                    <p className="item"><i className="teal money icon"></i>我的钱包</p>
+                    <p className="item"><i className="teal help icon"></i>帮助与反馈</p>
+                    <p className="item"><i className="teal setting icon"></i>设置</p>
                 </div>
             </NavLink>
-        )
+        );
+
+        homeLink = [
+            (
+                <NavLink 
+                    exact 
+                    to="/"
+                    className={`item`}
+                    activeClassName="active"
+                    key={0}
+                ><i className="tripadvisor icon"></i>发现</NavLink>
+            ),
+            (
+                <NavLink 
+                    exact 
+                    to="/attention"
+                    className={`item`}
+                    activeClassName="active"
+                    key={1}
+                ><i className="thumbs outline up icon"></i>关注</NavLink>
+            ),
+            (
+                <NavLink 
+                    exact 
+                    to="/message"
+                    className={`${S.message} ui dropdown item`}
+                    activeClassName="active"
+                    key={2}
+                >
+                    <i className="alarm outline icon"></i>消息
+                    <div className={`${S.dropDown} menu`}>
+                        <p className="item"><i className="teal comments outline icon"></i>评论</p>
+                        <p className="item"><i className="teal mail outline icon"></i>简信</p>
+                        <p className="item"><i className="teal external share icon"></i>投稿请求</p>
+                        <p className="item"><i className="teal empty heart icon"></i>喜欢和赞</p>
+                        <p className="item"><i className="teal unhide icon"></i>关注</p>
+                        <p className="item"><i className="teal diamond icon"></i>赞赏</p>
+                        <p className="item"><i className="teal talk outline icon"></i>其他消息</p>
+                    </div>
+                </NavLink>
+            )
+        ]
+
     } else {
         userLink = [
-            (<NavLink to="/sign_in"
-                className={`item`}
+            (<NavLink 
+                to="/sign_in"
+                className={`${S.login} item`}
                 activeClassName="active"
                 key={0}
-            >登录</NavLink>),
-            (<NavLink to="/sign_up"
+            ><i className="sign in icon"></i>登录</NavLink>),
+            (<NavLink 
+                to="/sign_up"
                 className={`item`}
                 activeClassName="active"
                 key={1}
-            >注册</NavLink>)
+            ><i className="sign out icon"></i>注册</NavLink>)
         ]
+
+        homeLink = (
+            <NavLink 
+                exact 
+                to="/"
+                className={`item`}
+                activeClassName="active"
+            ><i className="home icon"></i>首页</NavLink>
+        )
     }
 
     return (
-        <div className={`ui fixed secondary pointing menu ${S.nav}`}>
+        <div className={`ui fixed huge borderless menu teal pointing ${S.nav}`}>
             <div className="ui container">
-
-                <Link to="/"
-                    className={`header item`}
-                >Noods</Link>
-
-                <NavLink exact to="/"
+                <div 
+                    to="/"
                     className={`item`}
-                    activeClassName="active"
-                >首页</NavLink>
-
+                >
+                    <img src="//cdn2.jianshu.io/assets/web/logo-58fd04f6f0de908401aa561cda6a0688.png" />
+                </div>
+                {homeLink}
+                <div className="item">
+                    <div className="ui icon input">
+                        <input type="text" placeholder="Search..." />
+                        <i className="search icon"></i>
+                    </div>
+                </div>
                 <div className="menu right">
                     {userLink}
-                    <NavLink to="/write"
+                    <NavLink 
+                        to="/write"
                         className={`item`}
                         activeClassName="active"
-                    >写文章</NavLink>
+                    ><i className="edit icon"></i>写文章</NavLink>
                 </div>
             </div>
         </div>
     );
 }
 Nav.propTypes = propTypes;
+

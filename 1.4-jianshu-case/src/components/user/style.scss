@@ -5,7 +5,18 @@
 
 .sign_panel{
     text-align: left!important;
-
+    
+    .sign_field_tip {
+        
+        border: none;
+        border-top: 1px solid #dddddd;
+        margin-top: 20px;
+    }
+    .sign_legend_tip {
+        text-align: center;
+        padding: 0 40px; 
+        color: #999999;
+    }
 }
 .err{color:#9f3a38;}
 .title{

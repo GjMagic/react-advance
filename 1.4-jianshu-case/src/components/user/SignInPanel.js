@@ -140,12 +140,14 @@ export default class SignInPanel extends React.Component{
                         />
                         {passwErrMsg}
                     </div>
-
                     <div className="field">
                         <button 
                             type="submit"
                             className="ui button fluid primary"
                         >登录</button>
+                        {/* <fieldset className={S.sign_field_tip}>
+                            <legend className={S.sign_legend_tip}>社交账号登录</legend>
+                        </fieldset> */}
                     </div>
                 </form>
             </div>

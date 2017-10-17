@@ -199,6 +199,12 @@ export default class Layout extends React.Component{
             console.log(err)
         })
 
+        /* $
+        .post('https://www.easy-mock.com/mock/59b1f69ee0dc663341a1afd6/example/getUser')
+        .done(res => {
+            console.log(res)
+        }) */
+
         // 刷新my_page页面时初始化my_page
         let {state, pathname} = this.props.location;
         if(state) {

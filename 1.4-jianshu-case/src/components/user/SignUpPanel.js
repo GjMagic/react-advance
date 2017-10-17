@@ -183,8 +183,9 @@ export default class SignUpPanel extends React.Component{
                     <div className="field">
                         <button 
                             type="submit"
-                            className="ui button fluid primary"
+                            className="ui button fluid positive"
                         >注册</button>
+                        
                     </div>
                 </form>
             </div>
