@@ -1,7 +1,7 @@
 import Panel from './Panel';
 import S from './style.scss';
-import Validation from 'util/validation.js'
-import PropTypes from 'prop-types'
+import Validation from 'util/validation.js';
+import PropTypes from 'prop-types';
 
 let propTypes = {
     signUpAjax: PropTypes.func,
@@ -155,7 +155,6 @@ export default class SignUpPanel extends React.Component{
                         <input
                             type="text"
                             placeholder="用户名"
-                            ref="nameDom"
                             value={username}
                             onChange={changeName}
                         />
@@ -185,7 +184,6 @@ export default class SignUpPanel extends React.Component{
                             type="submit"
                             className="ui button fluid positive"
                         >注册</button>
-                        
                     </div>
                 </form>
             </div>

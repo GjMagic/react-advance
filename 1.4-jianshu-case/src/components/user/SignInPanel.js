@@ -1,7 +1,7 @@
 import Panel from './Panel';
 import S from './style.scss';
-import Validation from 'util/validation.js'
-import PropTypes from 'prop-types'
+import Validation from 'util/validation.js';
+import PropTypes from 'prop-types';
 
 let propTypes = {
     signInAjax: PropTypes.func,
@@ -145,9 +145,6 @@ export default class SignInPanel extends React.Component{
                             type="submit"
                             className="ui button fluid primary"
                         >登录</button>
-                        {/* <fieldset className={S.sign_field_tip}>
-                            <legend className={S.sign_legend_tip}>社交账号登录</legend>
-                        </fieldset> */}
                     </div>
                 </form>
             </div>

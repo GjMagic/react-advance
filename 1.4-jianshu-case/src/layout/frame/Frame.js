@@ -4,7 +4,7 @@ import Home from 'view/home/Home.js';
 import SignIn from 'view/user/SignIn';
 import SignUp from 'view/user/SignUp';
 import MyPage from 'view/myPage/MyPage';
-import Write from 'view/write/write';
+import WritePage from 'view/write/WritePage';
 import LoginHint from 'layout/LoginHint';
 
 import S from './style.scss';
@@ -108,7 +108,7 @@ export default class Layout extends React.Component{
             if(code === 0) {
                 setTimeout(() => {
                     this.initMyInfo(resData.data);
-                },600)
+                },800)
             }
         })
         .catch(err => {
@@ -311,7 +311,7 @@ export default class Layout extends React.Component{
                 <Route path='/write' render={
                     (props) => (
                         myInfo ? (
-                            <Write 
+                            <WritePage 
                                 {...{
                                     myInfo
                                 }}

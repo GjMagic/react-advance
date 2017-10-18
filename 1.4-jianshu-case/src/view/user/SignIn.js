@@ -1,5 +1,5 @@
 
-import SignInPanel from 'components/user/SignInPanel';
+import SignInPan from 'components/user/SignInPan';
 import EntryPanel from 'components/user/Panel';
 import PropTypes from 'prop-types'
 
@@ -24,7 +24,7 @@ export default class SignIn extends React.Component{
         let { signInAjax, signInMsg } = this.props;
         return (
             <EntryPanel >
-                <SignInPanel {...{ 
+                <SignInPan {...{ 
                     signInAjax, 
                     signInMsg
                 }} />

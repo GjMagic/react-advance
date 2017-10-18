@@ -1,0 +1,72 @@
+html,body {
+    height: 100%;
+}
+.container {
+    width: 100%;
+    height: 100%;
+    background: #ffffff;
+}
+
+.left_side {
+    width: 16.6%;
+    height: 100%;
+    background: #3f3f3f;
+    overflow: hidden;
+}
+.back_home {
+    width: 215px;
+    height: 40px;
+    display: block;
+    border: 1px solid #ec6c4b;
+    border-radius: 20px;
+    color: #ec6c4b;
+    text-align: center;
+    line-height: 40px;
+    margin: 25px 0 25px 20px;
+}
+.left_side h3 {
+    padding-left: 20px;
+    color: #ffffff;
+    cursor: pointer;
+    font-size: 12px;
+}
+.add_icon {
+    width: 14px;
+    height: 14px;
+    background: url(../images/jia.svg) no-repeat;
+}
+.new_collect {
+    padding: 15px 0 0 20px;
+    display: none;
+}
+.new_collect input {
+    width: 210px;
+    height: 35px;
+    background: rgba(153, 153, 153, .3);
+    border-radius: 5px;
+    padding-left: 10px;
+    color: #ffffff;
+    outline: none;
+    margin-bottom: 10px;
+}
+.new_collect a{
+    width: 65px;
+    height: 30px;
+    text-align: center;
+    line-height: 30px;
+}
+.new_collect .ensure {
+    border: 1px solid #34ab20;
+    border-radius: 30px;
+    color: #34ab20;
+}
+.new_collect .ensure:hover {
+    background: rgba(52, 171, 32, .15);
+}
+.new_collect .cancel {
+    line-height: 32px;
+    color: #bbbbbb;
+}
+.new_collect .cancel:hover {
+    color: #ffffff;
+}

@@ -55,7 +55,7 @@ config.module.rules.push(
     },
     {
         test: /\.css$/,
-        use: ['style-loader', 'css-loader']
+        use: ['style-loader!css-loader?modules', 'css-loader'] // 改动过
     },
     {
         test: /\.scss$/,

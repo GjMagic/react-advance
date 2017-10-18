@@ -9,11 +9,13 @@ export default function Panel({children}){
                     <div className={S['normal-title']}>
                         <NavLink 
                             to="/sign_in"
+                            className={S.over}
                             activeClassName={S.active}
                         >登录</NavLink>
                         <b>·</b>
                         <NavLink 
                             to="/sign_up"
+                            className={S.over}
                             activeClassName={S.active}
                         >注册</NavLink>
                     </div>
