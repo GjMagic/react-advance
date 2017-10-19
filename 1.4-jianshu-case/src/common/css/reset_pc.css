@@ -1,0 +1,61 @@
+/* CSS Document */
+body,h1,h2,h3,h4,h5,h6,p,dl,dd{
+	margin:0;
+	font-weight:normal;
+	font-size:14px;
+	font-family:"微软雅黑";
+	line-height:1;	
+}
+body{
+	background:#fff;	
+}
+strong,b{
+	font-weight:normal;	
+}
+em,i{
+	font-style:normal;	
+}
+ul,ol{
+	margin:0;
+	padding:0;
+	list-style:none;	
+}
+a{
+	text-decoration:none;
+	color:inhrent;	
+}
+mark{
+	background:none;
+	color:inhrent;	
+}
+img{
+	vertical-align:top;
+	border:0;	
+}
+.clearfix:after{
+	content:"";
+	display:block;
+	clear:both;
+	height:0;
+	overflow:hidden;
+}
+.clearfix{
+	zoom:1;	
+}
+.fl{
+	float:left;
+}
+.fr{
+	float:right;
+}
+input,fieldset,textarea{
+	padding:0;
+	margin:0;
+	border:0;
+	background:none;
+	vertical-align:top;
+	resize:none;	
+}
+form{
+	margin:0;
+}

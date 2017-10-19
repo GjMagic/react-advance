@@ -8,8 +8,8 @@ import WritePage from 'view/write/WritePage';
 import LoginHint from 'layout/LoginHint';
 
 import S from './style.scss';
-import Axios from 'axios'
-import cfg from 'config/config.json'
+import Axios from 'axios';
+import cfg from 'config/config.json';
 
 export default class Layout extends React.Component{
     constructor(props){

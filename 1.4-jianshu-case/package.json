@@ -9,15 +9,18 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "animate.css": "^3.5.2",
     "antd": "^2.13.6",
     "axios": "^0.16.2",
     "jquery": "^3.2.1",
     "prop-types": "^15.5.8",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
+    "react-draft-wysiwyg": "^1.10.12",
     "react-router": "^4.1.1",
     "react-router-dom": "^4.1.1",
-    "semantic-ui": "^2.2.10"
+    "semantic-ui": "^2.2.10",
+    "wangeditor": "^3.0.10"
   },
   "devDependencies": {
     "babel-core": "^6.24.0",

@@ -6,6 +6,8 @@ import Axios from 'axios'
 
 import Frame from 'frame/Frame'
 
+require('common/css/reset_pc.css');
+require('common/css/iconfont/iconfont.css');
 require('semantic/dist/semantic.min.css')
 require('semantic/dist/semantic.min.js')
 

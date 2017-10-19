@@ -1,9 +1,9 @@
 html,body {
     height: 100%;
 }
-.container {
+.containers {
     width: 100%;
-    height: 100%;
+    height: 698px;
     background: #ffffff;
 }
 
@@ -24,6 +24,9 @@ html,body {
     line-height: 40px;
     margin: 25px 0 25px 20px;
 }
+.back_home:hover {
+    color: #ec6c4b;
+}
 .left_side h3 {
     padding-left: 20px;
     color: #ffffff;
@@ -33,11 +36,14 @@ html,body {
 .add_icon {
     width: 14px;
     height: 14px;
-    background: url(../images/jia.svg) no-repeat;
+    background: url(../images/jia.png) no-repeat;
 }
 .new_collect {
-    padding: 15px 0 0 20px;
+    padding: 0 0 0 20px;
     display: none;
+}
+.new_collect.active {
+    display: block;
 }
 .new_collect input {
     width: 210px;
@@ -69,4 +75,143 @@ html,body {
 }
 .new_collect .cancel:hover {
     color: #ffffff;
+}
+.collections {
+    padding-top: 10px;
+    margin-bottom: 10px;
+}
+.collections>li {
+    padding-left: 20px;
+    line-height: 40px;
+    color: #ffffff;
+    cursor: pointer;
+    border-left: 3px solid transparent;
+    position: relative;
+}
+.collections>li:hover {
+    background: rgba(255, 255, 255, .2);
+    border-left: 3px solid transparent;
+}
+.collections>li.active {
+    background: rgba(255, 255, 255, .2);
+    border-left: 3px solid #ec7259; 
+}
+.clt_setting {
+    width: 16px;
+    height: 40px;
+    background: url(../images/setting.png) no-repeat left center;
+    margin-right: 22px;
+    display: none;
+}
+.clt_setting.active {
+    display: block;
+}
+.left_side h2 {
+    line-height: 40px;
+    color: #999999;
+    padding-left: 20px;
+    cursor: pointer;
+    font-size: 1rem;
+    margin-top: 10px;
+}
+.recycle_icon {
+    width: 20px;
+    height: 20px;
+    background: url(../images/recycle_icon.png) no-repeat left center;
+    margin-top: 10px;
+}
+.mid_new {
+    width: 25%;
+    height: 698px;
+    background: #ffffff;
+    border-right: 1px solid #dddddd;
+}
+.mid_new h2 {
+    height: 55px;
+    line-height: 55px;
+    font-size: 16px;
+    color: #333333;
+    font-weight: normal;
+    padding-left: 25px;
+    cursor: pointer;
+    margin: 0;
+}
+.add_article {
+    width: 16px;
+    height: 55px;
+    background: url(../images/add_jia.png) no-repeat left center;
+    margin-right: 8px;
+}
+.articles li {
+    height: 90px;
+    border-top: 1px solid #dddddd;
+    border-left: 4px solid transparent;
+    padding-left: 20px;
+    line-height: 65px;
+    cursor: pointer;
+}
+.articles li:hover {
+    background: rgba(178, 178, 178, .25);
+}
+.articles li.active {
+    border-left: 4px solid #ec7259;
+    background: rgba(178, 178, 178, .25) url(../images/setting_artic.png) no-repeat 90% center;
+}
+.o_article {
+    width: 30px;
+    height: 90px;
+    background: url(../images/o_article.png) no-repeat left center;
+    margin-right: 15px;
+}
+.articles span {
+    font-size: 18px;
+    color: #333333;
+    font-weight: 400;
+}
+.mid_new h4 {
+    padding-left: 20px;
+    font-size: 12px;
+    color: #666666;
+    font-weight: 300;
+    cursor: pointer;
+    line-height: 12px;
+}
+.add_down_arti {
+    width: 12px;
+    height: 12px;
+    background: url(../images/jia_artic.png) no-repeat;
+}
+.editor_title {
+    height: 70px;
+    padding-left: 40px;
+    font-size: 30px;
+}
+.right_side {
+    width: 58.4%;
+}
+.editor_title {
+    width: 100%;
+    outline: none;
+}
+.tips {
+    width: 155px;
+    height: 80px;
+    position: absolute;
+    right: 10px;
+    bottom: -50px;
+    display: none;
+}
+.tip_content {
+    background: #ffffff;
+    border: 1px solid #cccccc;
+    border-radius: 8px;
+}
+.tip_content .change_clt {
+    height: 40px;
+    padding-left: 10px;
+    line-height: 22px;
+    color: #333333;
+}
+.tips.active {
+    display: block;
 }
