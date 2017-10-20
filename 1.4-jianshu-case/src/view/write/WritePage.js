@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import Axios from 'axios';
 import cfg from 'config/config.json';
 
+import NewCltLi from './NewCltLi';
 import { Editor } from 'react-draft-wysiwyg';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 
@@ -35,13 +36,15 @@ export default class WritePage extends Component{
             contentVal: '',
             editorState: '', // 富文本编辑器状态
             isAppear: false, //点击添加文集后，是否出现input框
-            isClick: 1 // 文集是否被点击过, 停在第一个地方
+            childId: 1
         }
         this.onEditorStateChange = this.onEditorStateChange.bind(this);
         this.inputAppear = this.inputAppear.bind(this);
         this.changeClt = this.changeClt.bind(this);
         this.cancelAddClt = this.cancelAddClt.bind(this);
         this.addCollection = this.addCollection.bind(this);
+        this.onchangeChildId = this.onchangeChildId.bind(this);
+        this.onDeleteClt = this.onDeleteClt.bind(this);
         
     }
 
@@ -92,14 +95,24 @@ export default class WritePage extends Component{
             cltVal: '',
             collections,
             isAppear: false,
-            isClick: t
+            childId: t
         })
     }
 
-    // 点击文集
-    clickClt(id) {
+    // 改变子li的id的回调函数
+    onchangeChildId(id) {
         this.setState({
-            isClick: id
+            childId: id
+        })
+    }
+
+    // 删除文集的回调函数
+    onDeleteClt(id) {
+        collections = collections.filter(item => {
+            return item.id !== id
+        })
+        this.setState({
+            collections
         })
     }
 
@@ -110,52 +123,30 @@ export default class WritePage extends Component{
             changeClt,
             cancelAddClt,
             addCollection,
-            clickClt
+            onchangeChildId,
+            onDeleteClt
         } = this;
         let {
             editorState, 
             isAppear, 
             cltVal, 
             collections,
-            isClick
+            childId
         } = this.state;
 
         collections = collections.map((item, i) => {
             let {id, collection_name} = item;
             return (
-                <li 
+                <NewCltLi
                     key={i}
-                    data-id={id}
-                    // 如果想要找到指定元素，把他的id传到函数里，然后设置状态改变id，再进行判断
-                    onClick={clickClt.bind(this, id)} // 如果要往函数里传参就在bind里传
-                    className={`${isClick === id ? 'active' : ''} clearfix o_collection`}
-                >
-                    <span
-                        data-id={id}
-                        onMouseDown={ev => {
-                            ev.preventDefault();
-                        }}
-                    >{collection_name}</span>
-                    <i 
-                        className={`${isClick === id ? 'active' : ''} clt_setting fr`}
-                    ></i>
-                    <div 
-                        className={`${isClick === id ? 'active' : ''} tips`}
-                        data-id={id}
-                    >
-                        <b className="iconfont icon-up"></b>
-                        <ul className="tip_content">
-                            <li className="change_clt">
-                                <i className=""></i>
-                                修改文集名
-                            </li>
-                            <li className="change_clt">
-                                <i className=""></i>
-                                删除文集
-                            </li>
-                        </ul>
-                    </div>
-                </li>
+                    {...{
+                        id, 
+                        collection_name,
+                        childId,
+                        onchangeChildId,
+                        onDeleteClt
+                    }}
+                />   
             )
         })
 
@@ -178,6 +169,7 @@ export default class WritePage extends Component{
                         <input 
                             type="text" 
                             placeholder="请输入文集名..."
+                            className={`${isAppear ? 'active' : ''} cltInput`}
                             ref={input => { this.cltInput = input }} 
                             value={cltVal}
                             onChange={changeClt}

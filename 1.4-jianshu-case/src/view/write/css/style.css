@@ -45,7 +45,7 @@ html,body {
 .new_collect.active {
     display: block;
 }
-.new_collect input {
+.cltInput {
     width: 210px;
     height: 35px;
     background: rgba(153, 153, 153, .3);
@@ -54,6 +54,7 @@ html,body {
     color: #ffffff;
     outline: none;
     margin-bottom: 10px;
+    display: none;
 }
 .new_collect a{
     width: 65px;
@@ -80,7 +81,7 @@ html,body {
     padding-top: 10px;
     margin-bottom: 10px;
 }
-.collections>li {
+.collections>div>li {
     padding-left: 20px;
     line-height: 40px;
     color: #ffffff;
@@ -88,19 +89,29 @@ html,body {
     border-left: 3px solid transparent;
     position: relative;
 }
-.collections>li:hover {
+.collections>div>li:hover {
     background: rgba(255, 255, 255, .2);
     border-left: 3px solid transparent;
 }
-.collections>li.active {
+.collections>div>li.active {
     background: rgba(255, 255, 255, .2);
     border-left: 3px solid #ec7259; 
+}
+.collections>div>.modify_clt {
+    line-height: 40px;
+    background: #ffffff;
+    padding-left: 10px;
+    width: 100%;
+}
+.collections>div>.cltInput {
+    margin: 0;
+    width: 100%;
 }
 .clt_setting {
     width: 16px;
     height: 40px;
     background: url(../images/setting.png) no-repeat left center;
-    margin-right: 22px;
+    margin-right: 12px;
     display: none;
 }
 .clt_setting.active {
@@ -194,24 +205,57 @@ html,body {
     outline: none;
 }
 .tips {
-    width: 155px;
+    width: 160px;
     height: 80px;
     position: absolute;
-    right: 10px;
-    bottom: -50px;
+    right: 0;
+    bottom: -72px;
     display: none;
+    padding-top: 16px;
+    z-index: 999;
 }
 .tip_content {
     background: #ffffff;
     border: 1px solid #cccccc;
+    border-top: 1px solid #ffffff;
     border-radius: 8px;
+    position: relative;
 }
-.tip_content .change_clt {
+.tip_content>li {
     height: 40px;
     padding-left: 10px;
-    line-height: 22px;
+    line-height: 40px;
     color: #333333;
+    border-radius: 8px;
+}
+.tip_content>li:hover {
+    background: #666666;
+    color: #ffffff;
+}
+.tip_content>li i {
+    padding-right: 5px;
+    font-size: 14px;
 }
 .tips.active {
     display: block;
+}
+.tip_line {
+    width: 158px;
+    height: 1px;
+    background: #eeeeee;
+    position: absolute;
+    left: 0;
+    top: 50%;
+}
+.tips b {
+    position: absolute;
+    right: 12px;
+    top: -6px;
+    font-size: 20px;
+}
+.active {
+    display: block;
+}
+.dis_appear {
+    display: none;
 }
