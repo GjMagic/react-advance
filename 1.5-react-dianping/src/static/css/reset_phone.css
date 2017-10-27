@@ -1,0 +1,86 @@
+/* CSS Document */
+a,
+input,
+button {
+	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+	/*去掉点击时出现的黑色阴影*/
+}
+input,
+button {
+	-webkit-appearance: none;
+	border-radius: 0;
+	/*去掉默认的按钮圆角*/
+}
+body {
+	-webkit-user-select:none;
+	/*用户在选中文字时会出现的默认样式*/
+	-webkit-text-size-adjust: 100%;
+	/*
+		禁止用户改变我们的字体大小,
+		保证文字在横竖切换时，大小不被缩放
+	*/
+}
+body * {
+	-webkit-user-select:none;
+	font-family:  Helvetica,"微软雅黑";
+	box-sizing: border-box;
+	font-size: 1rem;
+}
+body,h1,h2,h3,h4,h5,h6,p,dl,dd{
+	margin:0;
+	font-weight:normal;
+	line-height:1;	
+}
+body{
+	background: #f4f4f4;	
+}
+strong,b{
+	font-weight:normal;	
+}
+em,i{
+	font-style:normal;	
+}
+ul,ol{
+	margin:0;
+	padding:0;
+	list-style:none;	
+}
+a{
+	text-decoration:none;
+	color:inhrent;	
+}
+mark{
+	background:none;
+	color:inhrent;	
+}
+img{
+	vertical-align:top;
+	border:0;	
+}
+.clearfix:after{
+	content:"";
+	display:block;
+	clear:both;
+	height:0;
+	overflow:hidden;
+}
+.clearfix{
+	zoom:1;	
+}
+.fl{
+	float:left;
+}
+.fr{
+	float:right;
+}
+input,fieldset,textarea{
+	padding:0;
+	margin:0;
+	border:0;
+	background:none;
+	vertical-align:top;
+	resize:none;	
+}
+form{
+	margin:0;
+}
