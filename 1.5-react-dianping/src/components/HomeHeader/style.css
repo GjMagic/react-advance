@@ -1,0 +1,42 @@
+.home_header {
+  height: 5rem;
+  background: #f3394e;
+  padding: 1rem 1.5rem 1rem 2rem;
+}
+.city_select {
+  margin-right: 1.3rem;
+  padding-top: 0.7rem;
+}
+.city_select a {
+  color: #ffffff;
+  font-size: 1.5rem;
+  padding-right: 0.5rem;
+}
+.icon-down {
+  color: #ffffff;
+}
+.search {
+  width: 23.6rem;
+  height: 3rem;
+  background: #ffffff;
+  border-radius: 1.5rem;
+  padding-left: 0.8rem;
+  line-height: 3rem;
+}
+.icon-search {
+  color: #dddddd;
+  padding-right: 0.5rem;
+}
+.search_input {
+  font-size: 1.3rem;
+  color: #dddddd;
+  line-height: 3rem;
+  outline: none;
+}
+.user_center {
+  width: 2.6rem;
+  height: 2.6rem;
+}
+.icon-yonghu {
+  color: #ffffff;
+}
