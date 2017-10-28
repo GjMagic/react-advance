@@ -8,7 +8,7 @@ import registerServiceWorker from './registerServiceWorker';
 import './static/css/reset_phone.css';
 import './config/rem';
 import './style.css';
-import './static/iconfont/iconfont.css';
+import './static/icon/iconfont.css';
 
 ReactDOM.render(
   <Router>

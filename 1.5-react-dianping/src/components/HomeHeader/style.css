@@ -9,11 +9,12 @@
 }
 .city_select a {
   color: #ffffff;
-  font-size: 1.5rem;
+  font-size: 1.6rem;
   padding-right: 0.5rem;
 }
-.icon-down {
+.iconfont.icon-down {
   color: #ffffff;
+  font-size: 1.6rem;
 }
 .search {
   width: 23.6rem;
@@ -23,9 +24,10 @@
   padding-left: 0.8rem;
   line-height: 3rem;
 }
-.icon-search {
+.iconfont.icon-search {
   color: #dddddd;
   padding-right: 0.5rem;
+  font-size: 1.6rem;
 }
 .search_input {
   font-size: 1.3rem;
@@ -33,10 +35,8 @@
   line-height: 3rem;
   outline: none;
 }
-.user_center {
-  width: 2.6rem;
-  height: 2.6rem;
-}
 .icon-yonghu {
   color: #ffffff;
+  font-size: 2.6rem !important;
+  line-height: 3rem;
 }
