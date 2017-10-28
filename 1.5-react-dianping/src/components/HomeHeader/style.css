@@ -1,42 +1,42 @@
 .home_header {
-  height: 5rem;
+  height: 4rem;
   background: #f3394e;
-  padding: 1rem 1.5rem 1rem 2rem;
+  padding: 0.8rem 1.2rem 0.8rem 1.6rem;
 }
 .city_select {
-  margin-right: 1.3rem;
-  padding-top: 0.7rem;
+  margin-right: 1.04rem;
+  padding-top: 0.56rem;
 }
 .city_select a {
   color: #ffffff;
-  font-size: 1.6rem;
-  padding-right: 0.5rem;
+  font-size: 1.28rem;
+  padding-right: 0.4rem;
 }
 .iconfont.icon-down {
   color: #ffffff;
-  font-size: 1.6rem;
+  font-size: 1.28rem;
 }
 .search {
-  width: 23.6rem;
-  height: 3rem;
+  width: 18.88rem;
+  height: 2.4rem;
   background: #ffffff;
-  border-radius: 1.5rem;
-  padding-left: 0.8rem;
-  line-height: 3rem;
+  border-radius: 1.2rem;
+  padding-left: 0.64rem;
+  line-height: 2.4rem;
 }
 .iconfont.icon-search {
   color: #dddddd;
-  padding-right: 0.5rem;
-  font-size: 1.6rem;
+  padding-right: 0.4rem;
+  font-size: 1.28rem;
 }
 .search_input {
-  font-size: 1.3rem;
+  font-size: 1.04rem;
   color: #dddddd;
-  line-height: 3rem;
+  line-height: 2.4rem;
   outline: none;
 }
 .icon-yonghu {
   color: #ffffff;
-  font-size: 2.6rem !important;
-  line-height: 3rem;
+  font-size: 2.08rem !important;
+  line-height: 2.4rem;
 }

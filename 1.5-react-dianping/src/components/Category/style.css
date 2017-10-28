@@ -1,0 +1,68 @@
+.category_wrapp {
+  height: 15.6rem;
+  background: #ffffff;
+  padding: 1.8rem 2.16rem 1.4rem 2.16rem;
+  overflow: hidden;
+}
+.category_wrapp a {
+  width: 3.84rem;
+  height: 5rem;
+  color: #333333;
+  font-size: 0.8rem;
+  margin-right: 1.6rem;
+  float: left;
+  display: block;
+  text-align: center;
+  margin-bottom: 0.96rem;
+}
+.category_wrapp a:nth-child(5) {
+  margin-right: 0;
+}
+.category_wrapp a:nth-child(10) {
+  margin-right: 0;
+}
+.category_wrapp a div {
+  width: 3.6rem;
+  height: 3.6rem;
+  margin-bottom: 0.56rem;
+}
+.category_wrapp a:nth-child(1) div {
+  background: url(images/icon_1.png) no-repeat center center;
+  background-size: 3.6rem 3.6rem;
+}
+.category_wrapp a:nth-child(2) div {
+  background: url(images/icon_2.png) no-repeat center center;
+  background-size: 3.6rem 3.6rem;
+}
+.category_wrapp a:nth-child(3) div {
+  background: url(images/icon_3.png) no-repeat center center;
+  background-size: 3.6rem 3.6rem;
+}
+.category_wrapp a:nth-child(4) div {
+  background: url(images/icon_4.png) no-repeat center center;
+  background-size: 3.6rem 3.6rem;
+}
+.category_wrapp a:nth-child(5) div {
+  background: url(images/icon_5.png) no-repeat center center;
+  background-size: 3.6rem 3.6rem;
+}
+.category_wrapp a:nth-child(6) div {
+  background: url(images/icon_6.png) no-repeat center center;
+  background-size: 3.6rem 3.6rem;
+}
+.category_wrapp a:nth-child(7) div {
+  background: url(images/icon_7.png) no-repeat center center;
+  background-size: 3.6rem 3.6rem;
+}
+.category_wrapp a:nth-child(8) div {
+  background: url(images/icon_8.png) no-repeat center center;
+  background-size: 3.6rem 3.6rem;
+}
+.category_wrapp a:nth-child(9) div {
+  background: url(images/icon_9.png) no-repeat center center;
+  background-size: 3.6rem 3.6rem;
+}
+.category_wrapp a:nth-child(10) div {
+  background: url(images/icon_10.png) no-repeat center center;
+  background-size: 3.6rem 3.6rem;
+}
