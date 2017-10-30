@@ -4,7 +4,7 @@ import Home from 'view/home/Home.js';
 import SignIn from 'view/user/SignIn';
 import SignUp from 'view/user/SignUp';
 import MyPage from 'view/myPage/MyPage';
-import WritePage from 'view/write/WritePage';
+import Write from 'view/write/Write';
 import LoginHint from 'layout/LoginHint';
 
 import S from './style.scss';
@@ -311,7 +311,7 @@ export default class Layout extends React.Component{
                 <Route path='/write' render={
                     (props) => (
                         myInfo ? (
-                            <WritePage 
+                            <Write 
                                 {...{
                                     myInfo
                                 }}
