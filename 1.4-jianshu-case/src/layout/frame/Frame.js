@@ -261,7 +261,7 @@ export default class Layout extends React.Component{
                         />
                     )
                 } />
-                <Route exact path="/sign_in" render={
+                <Route path="/sign_in" render={
                     (props) => (
                         myInfo ? (
                             <Redirect to="/" />
@@ -274,7 +274,7 @@ export default class Layout extends React.Component{
                         )
                     )
                 }/>
-                <Route exact path="/sign_up" render={
+                <Route path="/sign_up" render={
                     (props) => (
                         myInfo ? (
                             <Redirect to="/" />
@@ -287,7 +287,7 @@ export default class Layout extends React.Component{
                         )
                     )
                 }/>
-                <Route exact path="/my_page" render={
+                <Route path="/my_page" render={
                     (props) => (
                         // 通过地址栏url进入my_page页时并没有state，所以重定向到首页
                         props.location.state ? ( 
