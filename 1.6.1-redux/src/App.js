@@ -1,6 +1,20 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { addGUN, removeGUN, addGUNAsync } from './reducer';
+
+/* const mapStateToProps = (state) => {
+  return { num: state }
+}
+const mapDispatchToProps = { addGUN, removeGUN, addGUNAsync };
+App = connect(mapStateToProps, mapDispatchToProps)(App) */
+
+@connect(
+  // 要什么state放在props里
+  state => ({ num: state }), // mapStateToProps
+  // 要什么方法放在props里，并自动dispatch
+  { addGUN, removeGUN, addGUNAsync } // mapDispatchToProps
+)
+
 class App extends Component {
   render() {
     let { num, addGUN, removeGUN, addGUNAsync } = this.props;
@@ -15,9 +29,4 @@ class App extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  console.log(state)
-  return { num: state }
-}
-const mapDispatchToProps = { addGUN, removeGUN, addGUNAsync };
-export default connect(mapStateToProps, mapDispatchToProps)(App)
+export default App
