@@ -32,7 +32,6 @@ You may create subdirectories inside `src`. For faster rebuilds, only files insi
 You need to **put any JS and CSS files inside `src`**, otherwise Webpack won’t see them.
 
 Only files inside `public` can be used from `public/index.html`.<br>
-Read instructions below for using assets from JavaScript and HTML.
 
 ## Available Scripts
 
