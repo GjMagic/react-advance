@@ -11,6 +11,7 @@ import AuthRoute from './component/authroute/AuthRoute';
 
 import reducers from './reducer';
 import './config';
+import './index.css';
 
 const reduxDevtools = window.devToolsExtension() ? window.devToolsExtension() : () => {};
 const store = createStore(reducers, compose( // compose用来组合函数
