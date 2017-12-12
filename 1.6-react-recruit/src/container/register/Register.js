@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Logo from '../../component/logo/Logo';
 import { WingBlank, List, WhiteSpace, Button, InputItem, Radio } from 'antd-mobile';
+import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { register } from '../../redux/user.redux';
 
@@ -28,7 +29,7 @@ class Register extends Component {
       [type]: val
     })
   }
-
+// {useMongoClient: true}
   // 点击注册按钮
   handleRegister() {
     this.props.register(this.state)
@@ -38,11 +39,12 @@ class Register extends Component {
 
     const RadioItem = Radio.RadioItem;
     let { handleChange, handleRegister } = this;
-    let { msg } = this.props;
+    let { msg, redirectTo } = this.props;
     let { type } = this.state;
 
     return (
       <div>
+        { redirectTo ?  <Redirect to={ redirectTo } /> : null }
         <Logo />
         <WingBlank>
           { msg ? <p className="error-msg">{msg}</p> : null}
