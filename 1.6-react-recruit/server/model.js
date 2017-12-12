@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
-// 链接mongo 并且使用recruit这个集合
-const DB_URL = 'mongodb://localhost:27017/recruit';
+// 链接mongo 并且使用react-recruit这个集合
+const DB_URL = 'mongodb://localhost:27017/react-recruit';
 mongoose.connect(DB_URL, {useMongoClient: true});
 
 const models = {
@@ -31,7 +31,3 @@ module.exports = {
     return mongoose.model(name);
   }
 }
-
-/* mongoose.connection.on('connected', () => {
-  console.log('mongo connect success');
-}) */
