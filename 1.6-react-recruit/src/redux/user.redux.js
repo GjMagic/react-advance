@@ -4,13 +4,13 @@ import { getRedirectPath } from '../util';
 const REGISTER_SUCCESS = 'REGISTER_SUCCESS';
 const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 const ERROR_MSG = 'ERROR_MSG';
+const LOAD_DATA = 'LOAD_DATA';
 
 const initState = {
   redirectTo: '',
   isAuth: false, // 用户是否注册或登录成功
   msg: '',
   user: '',
-  pwd: '',
   type: ''
 }
 
@@ -39,6 +39,8 @@ export function user(state = initState, action) {
         isAuth: false,
         msg: action.msg
       }
+    case LOAD_DATA:
+      return {...state, ...action.payload}
     default:
       return state;
   }
@@ -63,6 +65,13 @@ function errorMsg(msg) {
   return {
     msg,
     type: ERROR_MSG
+  }
+}
+
+export function loadData(userinfo) {
+  return { 
+    type: LOAD_DATA, 
+    payload: userinfo
   }
 }
 

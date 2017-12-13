@@ -1,7 +1,13 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { loadData } from '../../redux/user.redux';
 @withRouter
+@connect( // 写在withRouter下面
+  null,
+  { loadData }
+)
 // 这是一个判断路由的组件
 class AuthRoute extends Component {
 
@@ -17,9 +23,9 @@ class AuthRoute extends Component {
       .get('/user/info')
       .then(res => {
         if(res.status === 200) {
-          console.log(res.data);
           if(res.data.code === 0) {
             // 有登录信息
+            this.props.loadData(res.data.data);
           }else {
             this.props.history.push('/login');
           }
