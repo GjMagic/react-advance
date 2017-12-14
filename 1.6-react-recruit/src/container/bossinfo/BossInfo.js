@@ -1,27 +1,56 @@
 import React, { Component } from 'react';
-import { NavBar, InputItem, TextareaItem } from 'antd-mobile';
+import { NavBar, InputItem, TextareaItem, Button } from 'antd-mobile';
+import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 import AvatarSelector from '../../component/avatar-selector/AvatarSelector';
-class BossInfo extends Component {
-  
+import { update } from '../../redux/user.redux';
+
+@connect(
+  state => state.user,
+  { update }
+)
+class BossInfo extends Component {  
   constructor(props) {
     super(props);
+    this.state = {
+      title: '',
+      company: '',
+      salary: '',
+      desc: '',
+      avatar: ''
+    }
     this.onChange = this.onChange.bind(this);
+    this.selectorAvatarHandle = this.selectorAvatarHandle.bind(this);
   }
   
   onChange(key, val) {
+    console.log(this.props.location)
     this.setState({
       [key]: val
     })
   }
 
+  selectorAvatarHandle(text) {
+    this.setState({
+      avatar: text
+    })
+  }
+
   render() {
 
-    let { onChange } = this;
+    let { onChange, selectorAvatarHandle } = this;
+
+    let { update, redirectTo, location } = this.props;
+
+    let path = location.pathname;
 
     return (
       <div>
+        { redirectTo && path !== redirectTo ? <Redirect to={ redirectTo } /> : null }
         <NavBar mode="dark">Boss完善信息页面</NavBar>
-        <AvatarSelector />
+        <AvatarSelector 
+          selectorAvatarHandle={selectorAvatarHandle}
+        />
         <InputItem
           onChange={ val => { onChange('title', val) } }
         >
@@ -44,6 +73,10 @@ class BossInfo extends Component {
           title='职位要求'
         >
         </TextareaItem>
+        <Button 
+          type="primary"
+          onClick={ () => { update(this.state) } }
+        >保存</Button>
       </div>
     )
   }
