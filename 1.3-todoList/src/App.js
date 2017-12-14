@@ -174,16 +174,16 @@ class App extends Component {
     // 数据为0时，main不显示            
     if(data.length) {
       main = (<section className="main">
-              <input 
-                className="toggle-all" 
-                type="checkbox"
-                checked={leftNum === 0}
-                onChange={toggleAll} // 全选按钮的状态通过onChange改变即可
-              />
-              <ul className="todo-list">
-                {todoItems}
-              </ul>
-            </section>);
+                <input 
+                  className="toggle-all" 
+                  type="checkbox"
+                  checked={leftNum === 0}
+                  onChange={toggleAll} // 全选按钮的状态通过onChange改变即可
+                />
+                <ul className="todo-list">
+                  {todoItems}
+                </ul>
+              </section>);
       
     }
 
@@ -200,10 +200,7 @@ class App extends Component {
     return (
       <section className="todoapp">
         <Header 
-          {...{
-            data,
-            changeDataHandle
-          }}
+          {...{ data, changeDataHandle }}
         />
         {main}
         {footer}
