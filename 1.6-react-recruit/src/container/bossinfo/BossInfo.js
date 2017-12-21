@@ -15,7 +15,7 @@ class BossInfo extends Component {
     this.state = {
       title: '',
       company: '',
-      salary: '',
+      money: '',
       desc: '',
       avatar: ''
     }
@@ -24,7 +24,6 @@ class BossInfo extends Component {
   }
   
   onChange(key, val) {
-    console.log(this.props.location)
     this.setState({
       [key]: val
     })
@@ -62,7 +61,7 @@ class BossInfo extends Component {
           公司名称
         </InputItem>
         <InputItem
-          onChange={ val => { onChange('salary', val) } }
+          onChange={ val => { onChange('money', val) } }
         >
           职位薪资
         </InputItem>

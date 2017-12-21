@@ -21,7 +21,6 @@ class GeniusInfo extends Component {
   }
   
   onChange(key, val) {
-    console.log(this.props.location)
     this.setState({
       [key]: val
     })
