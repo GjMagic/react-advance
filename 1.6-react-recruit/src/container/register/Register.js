@@ -4,44 +4,35 @@ import { WingBlank, List, WhiteSpace, Button, InputItem, Radio } from 'antd-mobi
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { register } from '../../redux/user.redux';
+import HocForm from '../../component/HocForm/HocForm';
 
 @connect( // react-redux自动把数据和方法放在props里
   state => state.user, // 数据
   { register } // 方法, 自动dispatch
 )
+@HocForm
 class Register extends Component {
 
   constructor(props) {
     super(props)
-    this.state = {
-      type: 'genius',
-      user: '',
-      pwd: '',
-      repeatpwd: ''
-    }
-    this.handleChange = this.handleChange.bind(this);
     this.handleRegister = this.handleRegister.bind(this);
   }
-  
-  // 当输入用户名、密码、确认密码时
-  handleChange(type, val) {
-    this.setState({
-      [type]: val
-    })
+
+  componentDidMount() {
+    this.props.handleChange('type', 'genius');
   }
 
   // 点击注册按钮
   handleRegister() {
-    this.props.register(this.state)
+    this.props.register(this.props.state)
   }
 
   render() {
 
     const RadioItem = Radio.RadioItem;
-    let { handleChange, handleRegister } = this;
-    let { msg, redirectTo } = this.props;
-    let { type } = this.state;
-
+    let { handleRegister } = this;
+    let { msg, redirectTo, handleChange } = this.props;
+    const { type } = this.props.state;
     return (
       <div>
         { redirectTo ? <Redirect to={redirectTo} /> : null}

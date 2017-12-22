@@ -6,13 +6,10 @@ import { NavBar } from 'antd-mobile';
 import NavLinkBar from '../navLink/NavLinkBar';
 import Boss from '../Boss/Boss';
 import Genius from '../Genius/Genius';
+import User from '../User/User';
 
 function Msg() { 
   return ( <h2>消息列表</h2> )
-}
-
-function User() { 
-  return ( <h2>用户中心列表</h2> )
 }
 
 @connect(
@@ -28,7 +25,7 @@ class Dashboard extends Component {
         path: '/boss',
         text: '牛人',
         icon: 'boss',
-        title: '牛人列表',
+        title: '牛人',
         component: Boss,
         hide: user.type === 'genius'
       },
@@ -36,7 +33,7 @@ class Dashboard extends Component {
         path: '/genius',
         text: 'boss',
         icon: 'job',
-        title: 'BOSS列表',
+        title: 'BOSS',
         component: Genius,
         hide: user.type === 'boss'
       },
@@ -44,7 +41,7 @@ class Dashboard extends Component {
         path: '/msg',
         text: '消息',
         icon: 'msg',
-        title: '消息列表',
+        title: '消息',
         component: Msg
       },
       {
@@ -61,7 +58,7 @@ class Dashboard extends Component {
         <NavBar className="fixd-header" mode="dark">
           {navList.find(item => item.path === pathname).title}
         </NavBar>
-        <div style={{ marginTop: 45 }}>
+        <div>
           <Switch>
             {navList.map((item, i) => (
               <Route key={i} path={item.path} component={item.component}/>

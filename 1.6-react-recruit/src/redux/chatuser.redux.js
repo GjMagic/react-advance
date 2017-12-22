@@ -27,7 +27,6 @@ export function getUserList(type) {
     .get('user/list?type=' + type)
     .then(res => {
       if(res.data.code === 0) {
-        console.log(res.data)
         dispatch(userList(res.data.data));
       }
     })

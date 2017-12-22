@@ -4,21 +4,18 @@ import { WingBlank, WhiteSpace, Button, List, InputItem } from 'antd-mobile';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { login } from '../../redux/user.redux';
+import HocForm from '../../component/HocForm/HocForm';
 
 @connect(
   state => state.user,
   { login }
 )
+@HocForm // 引入高阶组件
 class Login extends Component {
   
   constructor(props) {
     super(props)
-    this.state = {
-      user: '',
-      pwd: ''
-    }
     this.register = this.register.bind(this);
-    this.handleChange = this.handleChange.bind(this);
     this.handleLogin = this.handleLogin.bind(this);
   }
   
@@ -28,26 +25,18 @@ class Login extends Component {
     this.props.history.push('./register');
   }
 
-  // 表单的onChange事件
-  handleChange(type, val) {
-    this.setState({
-      [type]: val
-    })
-  }
-
   // 点击登录按钮
   handleLogin() {
-    this.props.login(this.state)    
+    this.props.login(this.props.state)    
   }
   render() {
     
-    let { register, handleChange, handleLogin } = this;
-
-    let { msg, redirectTo } = this.props;
+    let { register, handleLogin } = this;
+    let { msg, redirectTo, handleChange } = this.props;
 
     return (
       <div>
-        { redirectTo ? <Redirect to={redirectTo} /> : null}
+        { redirectTo && redirectTo !== '/login' ? <Redirect to={redirectTo} /> : null}
         <Logo />
         <WingBlank>
         { msg ? <p className="error-msg">{msg}</p> : null}

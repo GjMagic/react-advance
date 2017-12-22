@@ -4,6 +4,7 @@ import { getRedirectPath } from '../util';
 const AUTH_SUCCESS = 'AUTH_SUCCESS';
 const ERROR_MSG = 'ERROR_MSG';
 const LOAD_DATA = 'LOAD_DATA';
+const LOGOUT = 'LOGOUT';
 
 const initState = {
   redirectTo: '',
@@ -30,6 +31,8 @@ export function user(state = initState, action) {
       }
     case LOAD_DATA:
       return {...state, ...action.payload}
+    case LOGOUT:
+      return {...initState, redirectTo: '/login'}
     default:
       return state;
   }
@@ -55,6 +58,11 @@ export function loadData(userinfo) {
     type: LOAD_DATA, 
     payload: userinfo
   }
+}
+
+// 注销操作
+export function logoutSubmit() {
+  return { type: LOGOUT }
 }
 
 // 保存完善信息页面
