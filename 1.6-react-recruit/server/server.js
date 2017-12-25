@@ -9,7 +9,9 @@ const server = require('http').Server(app);
 const io = require('socket.io')(server)
 
 io.on('connection', (socket) => {
-  console.log('user login');
+  socket.on('sendmsg', (data) => {
+    io.emit('recvmsg', data); // 发布事件到前端
+  })
 })
 
 const userRouter = require('./user');

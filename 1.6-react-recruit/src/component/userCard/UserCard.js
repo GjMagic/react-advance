@@ -23,7 +23,7 @@ class UserCard extends Component {
     let { userlist } = this.props;
 
     return (
-      <WingBlank>
+      <WingBlank style={{marginTop: '45px'}}>
         {userlist.map((item, i) => (
           item.avatar
           ? <Card 
