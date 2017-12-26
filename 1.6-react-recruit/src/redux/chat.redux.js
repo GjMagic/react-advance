@@ -1,6 +1,6 @@
 import axios from 'axios';
 import io from 'socket.io-client';
-const socket = io('ws://localhost:9093'); // 跨域
+const socket = io('ws://localhost:9093'); // 解决跨域
 
 const MSG_LIST = 'MSG_LIST'; // 消息列表
 const MSG_RECV = 'MSG_LIST'; // 读取消息
@@ -20,7 +20,10 @@ export function chat(state = initState, action) {
         unread: action.payload.filter(item => !item.read).length
       }
     case MSG_RECV:
-      return {}
+      return {
+        ...state,
+        chatmsg: [...state.chatmsg, action.payload] 
+      }
     case MSG_READ:
       return {}
     default:
@@ -28,15 +31,33 @@ export function chat(state = initState, action) {
   }
 }
 
-// action creator
+// action creator(返回的必须是对象或者函数)
 function msgList(msgs) {
   return { type: MSG_LIST, payload: msgs }
+}
+
+function msgRecv(msg) {
+  return { type: MSG_RECV, payload: msg }
+}
+
+export function recvMsg() {
+  return dispatch => {
+    socket.on('recvmsg', (data) => {
+      dispatch(msgRecv(data));
+    })
+  }
+}
+
+export function sendMsg({from, to, msg}) {
+  return dispatch => {
+    socket.emit('sendmsg', { from, to, msg })
+  }
 }
 
 export function getMsgList() {
   return dispatch => {
     axios
-    .get('/user/getmsglit')
+    .get('/user/getmsglist')
     .then(res => {
       if(res.status === 200 && res.data.code === 0) {
         dispatch(msgList(res.data.msgs))

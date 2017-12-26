@@ -1,7 +1,8 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
-
+const model = require('./model');
+const Chat = model.getModel('chat');
 // 新建app
 const app = express();
 // work with express
@@ -10,7 +11,11 @@ const io = require('socket.io')(server)
 
 io.on('connection', (socket) => {
   socket.on('sendmsg', (data) => {
-    io.emit('recvmsg', data); // 发布事件到前端
+    const { from, to, msg } = data;
+    const chatid = [from, to].sort().join('_');
+    Chat.create({ chatid, from, to, content: msg }, (err, doc) => {
+      io.emit('recvmsg', Object.assign({}, doc._doc)) // 发布事件到前端
+    })
   })
 })
 
