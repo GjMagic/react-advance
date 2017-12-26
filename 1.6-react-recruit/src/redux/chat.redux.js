@@ -3,8 +3,8 @@ import io from 'socket.io-client';
 const socket = io('ws://localhost:9093'); // 解决跨域
 
 const MSG_LIST = 'MSG_LIST'; // 消息列表
-const MSG_RECV = 'MSG_LIST'; // 读取消息
-const MSG_READ = 'MSG_LIST'; // 标识已读
+const MSG_RECV = 'MSG_RECV'; // 读取消息
+const MSG_READ = 'MSG_READ'; // 标识已读
 
 const initState = {
   chatmsg: [],
