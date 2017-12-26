@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import { List, InputItem } from 'antd-mobile';
-import io from 'socket.io-client';
 
-const socket = io('ws://localhost:9093');
 
 class Chat extends Component {
 
@@ -16,20 +14,19 @@ class Chat extends Component {
   }
   
   componentDidMount() {
-    const { msg } = this.state;
-    socket.on('recvmsg', (data) => {
+    /* socket.on('recvmsg', (data) => {
       this.setState({
-        msg: [...msg, data.text]
+        msg: [...this.state.msg, data.text]
       })
-    })
+    }) */
   }
   
   handleSubmit() {
     const { text } = this.state;
-    socket.emit('sendmsg', { text }) // 发布事件到后端
+    /* socket.emit('sendmsg', { text }) // 发布事件到后端
     this.setState({
       text: ''
-    })
+    }) */
   }
 
   render() {
