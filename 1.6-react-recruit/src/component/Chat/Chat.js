@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { List, InputItem } from 'antd-mobile';
+import { List, InputItem, NavBar } from 'antd-mobile';
 import { connect } from 'react-redux';
 import { getMsgList, sendMsg, recvMsg } from '../../redux/chat.redux'; 
 
@@ -21,11 +21,6 @@ class Chat extends Component {
   componentDidMount() {
     this.props.getMsgList();
     this.props.recvMsg();
-    /* socket.on('recvmsg', (data) => {
-      this.setState({
-        msg: [...this.state.msg, data.text]
-      })
-    }) */
   }
   
   handleSubmit() {
@@ -41,13 +36,34 @@ class Chat extends Component {
   render() {
     // this.props.match(命中).params(参数).user(参数名)
     const { handleSubmit } = this;
-    const { text, msg } = this.state;
-
+    const { text } = this.state;
+    const { chat } = this.props;
+    const user = this.props.match.params.user;
     return (
-      <div>
-        { msg.map((item, i) => (
-          <p key={i}>{item}</p>
-        )) }
+      <div id="chat-page">
+        <NavBar mode="dark">
+          {user}
+        </NavBar>
+        { chat.chatmsg.map((item, i) => {
+          return (
+            item.from === user 
+            ? (
+              <List key={i}>
+                <List.Item
+                  
+                >{item.content}</List.Item>
+              </List>
+            )
+            : (
+              <List key={i}>
+                <List.Item 
+                  className="chat-me"
+                  extra="avatar"
+                >{item.content}</List.Item>
+              </List>
+            )
+          )
+        }) }
         <div className="stick-footer">
           <List>
             <InputItem

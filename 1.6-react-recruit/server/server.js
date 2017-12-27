@@ -13,6 +13,7 @@ io.on('connection', (socket) => {
   socket.on('sendmsg', (data) => {
     const { from, to, msg } = data;
     const chatid = [from, to].sort().join('_');
+    // { chatid, from, to, content: msg }
     Chat.create({ chatid, from, to, content: msg }, (err, doc) => {
       io.emit('recvmsg', Object.assign({}, doc._doc)) // 发布事件到前端
     })
