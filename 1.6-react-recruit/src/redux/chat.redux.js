@@ -8,6 +8,7 @@ const MSG_READ = 'MSG_READ'; // 标识已读
 
 const initState = {
   chatmsg: [],
+  users: {},
   unread: 0
 }
 // reducer
@@ -15,9 +16,10 @@ export function chat(state = initState, action) {
   switch (action.type) {
     case MSG_LIST:
       return {
-        ...state, 
-        chatmsg: action.payload, 
-        unread: action.payload.filter(item => !item.read).length
+        ...state,
+        chatmsg: action.payload.msgs, 
+        users: action.payload.users,
+        unread: action.payload.msgs.filter(item => !item.read).length
       }
     case MSG_RECV:
       return {
@@ -33,8 +35,8 @@ export function chat(state = initState, action) {
 }
 
 // action creator(返回的必须是对象或者函数)
-function msgList(msgs) {
-  return { type: MSG_LIST, payload: msgs }
+function msgList(msgs, users) {
+  return { type: MSG_LIST, payload: {msgs, users} }
 }
 
 function msgRecv(msg) {
@@ -61,7 +63,7 @@ export function getMsgList() {
     .get('/user/getmsglist')
     .then(res => {
       if(res.status === 200 && res.data.code === 0) {
-        dispatch(msgList(res.data.msgs))
+        dispatch(msgList(res.data.msgs, res.data.users))
       }
     })
   }
