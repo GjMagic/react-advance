@@ -69,6 +69,7 @@ class Chat extends Component {
             : (
               <List key={i}>
                 <List.Item
+                  className="chat-me"
                   extra={<img src={avatarT} alt="avatar" />}
                 >{item.content}</List.Item>
               </List>
